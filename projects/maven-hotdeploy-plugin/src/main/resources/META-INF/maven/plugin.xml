@@ -219,6 +219,13 @@
                     <editable>true</editable>
                     <description>Where to deploy the compiled sources to, relative to the web root.</description>
                 </parameter>
+                <parameter>
+                    <name>deployDirectory</name>
+                    <type>java.lang.String</type>
+                    <required>true</required>
+                    <editable>true</editable>
+                    <description>Where to deploy the application.</description>
+                </parameter>
             </parameters>
             <configuration>
                 <executable implementation="java.lang.String">${maven.compiler.executable}</executable>
