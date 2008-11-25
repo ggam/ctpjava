@@ -6,6 +6,7 @@
     <packaging>maven-plugin</packaging>
     <name>HotDeploy Maven Mojo</name>
     <url>http://www.ctp-consulting.com</url>
+    <description>Use JBoss Seam hot deployment with a Maven based build.</description>
     <pluginRepositories>
         <pluginRepository>
             <id>ops4j.releases</id>
@@ -15,6 +16,26 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
+    <developers>
+        <developer>
+            <id>thug</id>
+            <name>Thomas Hug</name>
+            <email>thomas.hug@ctp-consulting.com</email>
+        </developer>
+    </developers>
+    <scm>
+        <url>http://ctpjava.googlecode.com/svn/trunk/</url>
+    </scm>
+    <organization>
+        <name>Cambridge Technology Partners</name>
+        <url>http://www.ctp-consulting.com</url>
+    </organization>
+    <licenses>
+        <license>
+            <name>Apache 2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
     <build>
         <defaultGoal>install</defaultGoal>
         <plugins>
