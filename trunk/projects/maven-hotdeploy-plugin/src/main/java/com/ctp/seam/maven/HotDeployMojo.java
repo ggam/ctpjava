@@ -4,6 +4,7 @@
 package com.ctp.seam.maven;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,23 +17,41 @@ import org.apache.maven.plugin.MojoExecutionException;
 /**
  * Adapt the default compiler mojo to be used for Seam hot deployment.
  * @author Thomas Hug
- *
+ * 
+ * @extendsPlugin compiler
+ * @extendsGoal compile
+ * @goal compile
+ * @phase compile
+ * @requiresProject true
  */
 public class HotDeployMojo extends CompilerMojo {
 
     /**
      * Where to look for the hot deployable sources.
+     * @parameter default-value="${project.build.sourceDirectory}"
+     * @required
      */
     private String sourceDirectory;
     
     /**
+     * Where to put the hot deployable compiler output.
+     * @parameter default-value="${project.build.directory}/hotdeploy"
+     * @required
+     */
+    private File hotdeployOutputDirectory;
+    
+    /**
      * The directory the application gets deployed in. Not the app server directory,
      * directly the application directory containing the /WEB-INF directory.
+     * @parameter
+     * @required
      */
     private String deployDirectory;
     
     /**
      * Where to deploy the compiled sources to in the WAR file. 
+     * @parameter default-value="/WEB-INF/dev"
+     * @required
      */
     private String deployPath;
     
@@ -42,9 +61,7 @@ public class HotDeployMojo extends CompilerMojo {
      */
     public void execute() throws MojoExecutionException,
             CompilationFailureException {
-        if (deployDirectory == null) {
-            throw new MojoExecutionException("deployDirectory must be set.");
-        }
+        resetOutputDirectory();
         super.execute();
         cleanDeployDirectory();
     }
@@ -85,6 +102,32 @@ public class HotDeployMojo extends CompilerMojo {
             getLog().debug("Running clean on dir " + dir.getAbsolutePath());
             synchFolders(getOutputDirectory(), dir);
         }
+    }
+    
+    /**
+     * Overwrite the parent plugin's output directory.
+     * @throws MojoExecutionException   Field is not accessible.
+     */
+    protected void resetOutputDirectory() throws MojoExecutionException {
+        Field outputDirectory = null;
+        Class clazz = getClass().getSuperclass();
+        while (clazz != null) {
+            try {
+                outputDirectory = clazz.getDeclaredField("outputDirectory");
+                break;
+            } catch (NoSuchFieldException e) {
+                clazz = clazz.getSuperclass();
+            }
+        }
+        if (outputDirectory == null)
+            throw new MojoExecutionException("Could not update outputDirectory, field not found");
+        outputDirectory.setAccessible(true);
+        try {
+            outputDirectory.set(this, hotdeployOutputDirectory);
+        } catch (Exception e) {
+            throw new MojoExecutionException("Could not update outputDirectory", e);
+        }
+
     }
     
     /**

@@ -1,14 +1,36 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.ctp.seam.maven</groupId>
     <artifactId>maven-hotdeploy-plugin</artifactId>
-    <packaging>jar</packaging>
     <version>0.1.0</version>
+    <packaging>maven-plugin</packaging>
     <name>HotDeploy Maven Mojo</name>
     <url>http://www.ctp-consulting.com</url>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>ops4j.releases</id>
+            <url>http://repository.ops4j.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
     <build>
-    	<defaultGoal>install</defaultGoal>
+        <defaultGoal>install</defaultGoal>
+        <plugins>
+            <plugin>
+                <groupId>org.ops4j</groupId>
+                <artifactId>maven-inherit-plugin</artifactId>
+                <version>1.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>inherit</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
     <dependencies>
         <dependency>
@@ -20,6 +42,7 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
             <version>2.0.2</version>
+            <type>maven-plugin</type>
         </dependency>
     </dependencies>
 </project>
