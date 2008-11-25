@@ -66,7 +66,15 @@ public class HotDeployMojo extends CompilerMojo {
         return new File(configured.getAbsolutePath() + deployPath);
     }
 
-    
+    /* (non-Javadoc)
+     * @see org.apache.maven.plugin.CompilerMojo#getClasspathElements()
+     */
+    protected List getClasspathElements() {
+        List regular = super.getClasspathElements();
+        regular.add(getOutputDirectory().getAbsolutePath());
+        return regular;
+    }
+
     /**
      * Old hot deployable files need to be cleaned for the changes to be picked up.
      */
