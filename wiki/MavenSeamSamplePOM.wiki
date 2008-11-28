@@ -5,8 +5,8 @@ Starting reference for Seam Web applications deployed as WAR file.
 
 Features:
  * Seam 2.1.0.SP1
- * Building Seam hot deployable code in a different output directory
- * deploy changed XHTMLs, source code and hot deployable code into a JBoss installation.
+ * Building Seam hot deployable code into a different output directory
+ * Deploy changed XHTMLs, source code and hot deployable code into a JBoss installation.
 
 {{{
 <project xmlns="http://maven.apache.org/POM/4.0.0" 
