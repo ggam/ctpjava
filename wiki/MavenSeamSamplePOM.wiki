@@ -5,9 +5,8 @@ Starting reference for Seam Web applications deployed as WAR file.
 
 Features:
  * Seam 2.1.0.SP1
- * RichFaces 3.2.2.SR1
-
-TODO: Add Plugin Repo.
+ * Building Seam hot deployable code in a different output directory
+ * deploy changed XHTMLs, source code and hot deployable code into a JBoss installation.
 
 {{{
 <project xmlns="http://maven.apache.org/POM/4.0.0" 
@@ -28,6 +27,14 @@ TODO: Add Plugin Repo.
             <url>http://repository.jboss.org/maven2</url>
         </repository>
     </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>ctpjava</id>
+            <name>CTP Public Repository</name>
+            <url>http://ctpjava.googlecode.com/svn/trunk/repository</url>
+        </pluginRepository>
+    </pluginRepositories>
 
     <dependencies>
 
