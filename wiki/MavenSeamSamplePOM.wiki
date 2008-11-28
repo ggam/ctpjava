@@ -227,6 +227,25 @@ Features:
                     <target>${java.source.version}</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <additionalClasspathElements>
+                        <additionalClasspathElement>
+                            ${project.build.testSourceDirectory}/../bootstrap
+                        </additionalClasspathElement>
+                        <additionalClasspathElement>
+                            ${project.build.sourceDirectory}/../webapp
+                        </additionalClasspathElement>
+                    </additionalClasspathElements>
+                    <childDelegation>true</childDelegation>
+                    <useSystemClassLoader>true</useSystemClassLoader>
+                    <argLine>
+                        -Dsun.lang.ClassLoader.allowArraySyntax=true
+                    </argLine>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
