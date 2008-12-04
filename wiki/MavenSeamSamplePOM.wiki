@@ -259,6 +259,9 @@ Features:
                         <directory>${directory.hotdeployables}/WEB-INF/dev</directory>
                         <filtering>false</filtering>
                     </testResource>
+                    <testResource>
+                        <directory>${basedir}/src/test/resources</directory>
+                    </testResource>
                 </testResources>
                 <plugins>
                     <plugin>
