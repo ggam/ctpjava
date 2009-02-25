@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.ctp.seam.maven</groupId>
     <artifactId>maven-hotdeploy-plugin</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
     <packaging>maven-plugin</packaging>
     <name>HotDeploy Maven Mojo</name>
     <url>http://www.ctp-consulting.com</url>
@@ -64,6 +64,17 @@
             <artifactId>maven-compiler-plugin</artifactId>
             <version>2.0.2</version>
             <type>maven-plugin</type>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>2.1-alpha-2</version>
+            <type>maven-plugin</type>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.plexus</groupId>
+            <artifactId>plexus-utils</artifactId>
+            <version>1.5.5</version>
         </dependency>
     </dependencies>
 </project>
