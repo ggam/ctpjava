@@ -55,6 +55,9 @@ public class HotDeployMojo extends CompilerMojo {
      */
     private String deployPath;
     
+    // ------------------------------------------------------------------------
+    // PUBLIC METHDOS
+    // ------------------------------------------------------------------------
 
     /* (non-Javadoc)
      * @see org.apache.maven.plugin.CompilerMojo#execute()
@@ -65,6 +68,10 @@ public class HotDeployMojo extends CompilerMojo {
         super.execute();
         cleanDeployDirectory();
     }
+    
+    // ------------------------------------------------------------------------
+    // PROTECTED METHDOS
+    // ------------------------------------------------------------------------
 
     /* (non-Javadoc)
      * @see org.apache.maven.plugin.CompilerMojo#getCompileSourceRoots()
@@ -80,7 +87,7 @@ public class HotDeployMojo extends CompilerMojo {
      */
     protected File getOutputDirectory() {
         File configured = super.getOutputDirectory();
-        return new File(configured.getAbsolutePath() + deployPath);
+        return new File(configured.getAbsolutePath());
     }
 
     /* (non-Javadoc)
@@ -129,6 +136,10 @@ public class HotDeployMojo extends CompilerMojo {
         }
 
     }
+    
+    // ------------------------------------------------------------------------
+    // PRIVATE METHDOS
+    // ------------------------------------------------------------------------
     
     /**
      * Synchronize the content of two folders. Sync rules are:
