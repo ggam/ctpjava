@@ -30,6 +30,7 @@ public class HotClassesPackagingTask extends ClassesPackagingTask {
             throws MojoExecutionException {
         if (context instanceof SeamWarPackagingContext) {
             performHotPackaging((SeamWarPackagingContext) context);
+            performClassPackaging((SeamWarPackagingContext) context);
         } else {
             super.performPackaging(context);
         }
@@ -40,27 +41,41 @@ public class HotClassesPackagingTask extends ClassesPackagingTask {
     // ------------------------------------------------------------------------
     
     protected void performHotPackaging(SeamWarPackagingContext context) throws MojoExecutionException {
-        final PathSet hot = getFilesToIncludes(context.getHotdeployOutputDirectory(), null, null);
-        String[] excludes = prepareExcludes(context);
+        if (context.getHotdeployOutputDirectory().exists()) {
+            final PathSet hot = getFilesToIncludes(context.getHotdeployOutputDirectory(), null, null);
+            try {
+                copyFiles(Overlay.currentProjectInstance().getId(), context, context.getHotdeployOutputDirectory(),
+                        hot, HOT_CLASSES_PATH, false);
+            } catch ( IOException e ) {
+                throw new MojoExecutionException(
+                    "Could not copy webapp classes[" + context.getHotdeployOutputDirectory() + "]", e );
+            }
+        } else {
+            context.getLog().warn("Directory " + context.getHotdeployOutputDirectory().getAbsolutePath()
+                    + " does not exist. Call hotdeploy:compile before.");
+        }
+    }
+    
+    protected void performClassPackaging(SeamWarPackagingContext context) throws MojoExecutionException {
+        String[] excludes = context.isDuplicateClassExclusion() ? prepareExcludes(context) : null;
         final PathSet main = getFilesToIncludes(context.getClassesDirectory(), null, excludes);
         try {
             copyFiles(Overlay.currentProjectInstance().getId(), context, context.getClassesDirectory(),
                     main, CLASSES_PATH, false);
-            copyFiles(Overlay.currentProjectInstance().getId(), context, context.getHotdeployOutputDirectory(),
-                    hot, HOT_CLASSES_PATH, false);
         } catch ( IOException e ) {
             throw new MojoExecutionException(
-                "Could not copy webapp classes[" + context.getClassesDirectory().getAbsolutePath() + "]" +
-                "[" + context.getHotdeployOutputDirectory() + "]", e );
+                "Could not copy webapp classes[" + context.getClassesDirectory().getAbsolutePath() + "]", e );
         }
     }
     
     protected String[] prepareExcludes(SeamWarPackagingContext context) {
         File baseDir = context.getHotdeployOutputDirectory();
         Set result = new HashSet();
-        addClassFiles(result, baseDir, baseDir);
-        if (context.getLog().isDebugEnabled())
-            context.getLog().debug("Source exclude patterns: " + result);
+        if (baseDir.exists()) {
+            addClassFiles(result, baseDir, baseDir);
+            if (context.getLog().isDebugEnabled())
+                context.getLog().debug("Source exclude patterns: " + result);
+        }
         return (String[]) result.toArray(new String[] {});
     }
     

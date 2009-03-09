@@ -30,16 +30,32 @@ public class HotExplodedMojo extends WarExplodedMojo {
     
     /**
      * Where to put the hot deployable compiler output.
-     * @parameter default-value="${project.build.directory}/hotdeploy"
+     * @parameter default-value="${project.build.directory}/classes-hotdeploy"
      * @required
      */
     private File hotdeployOutputDirectory;
+    
+    /**
+     * The directory the application gets deployed in. Not the app server directory,
+     * directly the application directory containing the /WEB-INF directory.
+     * @parameter
+     * @required
+     */
+    private File deployDirectory;
+    
+    /**
+     * Exclude classes present in WEB-INF/dev from being copied into WEB-INF/classes.
+     * @parameter default-value="true"
+     * @required
+     */
+    private boolean duplicateClassExclusion;
     
     // ------------------------------------------------------------------------
     // PUBLIC METHDOS
     // ------------------------------------------------------------------------
 
     public void execute() throws MojoExecutionException, MojoFailureException {
+        setWebappDirectory(deployDirectory);
         super.execute();
     }
     
@@ -54,11 +70,12 @@ public class HotExplodedMojo extends WarExplodedMojo {
         WarPackagingContext ctx = super.createWarPackagingContext(
                 webappDirectory, cache, overlayManager,
                 defaultFilterWrappers, nonFilteredFileExtensions);
-        return new SeamWarPackagingContext(ctx, hotdeployOutputDirectory);
+        return new SeamWarPackagingContext(ctx, hotdeployOutputDirectory, duplicateClassExclusion);
     }
 
     protected WarProjectPackagingTask createWarPackagingTask() {
-        return new SeamWarProjectPackagingTask(getWebResources(), getWebXml(), getContainerConfigXML());
+        return new SeamWarProjectPackagingTask(getWebResources(), getWebXml(), 
+                getContainerConfigXML());
     }
 
 }

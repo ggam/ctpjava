@@ -22,10 +22,13 @@ public class SeamWarPackagingContext implements WarPackagingContext {
     
     private WarPackagingContext wrapped;
     private File hotdeployOutputDirectory;
+    private boolean duplicateClassExclusion;
     
-    public SeamWarPackagingContext(WarPackagingContext wrapped, File hotdeployOutputDirectory) {
+    public SeamWarPackagingContext(WarPackagingContext wrapped, File hotdeployOutputDirectory,
+            boolean duplicateClassExclusion) {
         this.wrapped = wrapped;
         this.hotdeployOutputDirectory = hotdeployOutputDirectory;
+        this.duplicateClassExclusion = duplicateClassExclusion;
     }
     
     // ------------------------------------------------------------------------
@@ -34,6 +37,10 @@ public class SeamWarPackagingContext implements WarPackagingContext {
 
     public File getHotdeployOutputDirectory() {
         return hotdeployOutputDirectory;
+    }
+    
+    public boolean isDuplicateClassExclusion() {
+        return duplicateClassExclusion;
     }
 
     /**
