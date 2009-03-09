@@ -35,7 +35,7 @@ public class HotDeployMojo extends CompilerMojo {
     
     /**
      * Where to put the hot deployable compiler output.
-     * @parameter default-value="${project.build.directory}/hotdeploy"
+     * @parameter default-value="${project.build.directory}/classes-hotdeploy"
      * @required
      */
     private File hotdeployOutputDirectory;
