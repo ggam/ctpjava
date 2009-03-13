@@ -5,7 +5,9 @@ package com.ctp.seam.maven.packaging;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
@@ -22,11 +24,13 @@ public class HotClassesPackagingTask extends ClassesPackagingTask {
     
     public static final String HOT_CLASSES_PATH = "WEB-INF/dev/";
     
+    private Map directoriesVisited = new HashMap();
+    
     // ------------------------------------------------------------------------
     // PUBLIC METHDOS
     // ------------------------------------------------------------------------
 
-    public void performPackaging(WarPackagingContext context)
+    public void performPackaging(final WarPackagingContext context)
             throws MojoExecutionException {
         if (context instanceof SeamWarPackagingContext) {
             performHotPackaging((SeamWarPackagingContext) context);
@@ -40,7 +44,7 @@ public class HotClassesPackagingTask extends ClassesPackagingTask {
     // PROTECTED METHDOS
     // ------------------------------------------------------------------------
     
-    protected void performHotPackaging(SeamWarPackagingContext context) throws MojoExecutionException {
+    protected void performHotPackaging(final SeamWarPackagingContext context) throws MojoExecutionException {
         if (context.getHotdeployOutputDirectory().exists()) {
             final PathSet hot = getFilesToIncludes(context.getHotdeployOutputDirectory(), null, null);
             try {
@@ -56,7 +60,7 @@ public class HotClassesPackagingTask extends ClassesPackagingTask {
         }
     }
     
-    protected void performClassPackaging(SeamWarPackagingContext context) throws MojoExecutionException {
+    protected void performClassPackaging(final SeamWarPackagingContext context) throws MojoExecutionException {
         String[] excludes = context.isDuplicateClassExclusion() ? prepareExcludes(context) : null;
         final PathSet main = getFilesToIncludes(context.getClassesDirectory(), null, excludes);
         try {
@@ -68,25 +72,31 @@ public class HotClassesPackagingTask extends ClassesPackagingTask {
         }
     }
     
-    protected String[] prepareExcludes(SeamWarPackagingContext context) {
-        File baseDir = context.getHotdeployOutputDirectory();
+    protected String[] prepareExcludes(final SeamWarPackagingContext context) {
+        File baseDir = context.getClassesDirectory();
         Set result = new HashSet();
-        if (baseDir.exists()) {
-            addClassFiles(result, baseDir, baseDir);
+        if (context.getHotdeployOutputDirectory().exists()) {
+            addClassFiles(result, baseDir, context);
             if (context.getLog().isDebugEnabled())
                 context.getLog().debug("Source exclude patterns: " + result);
         }
         return (String[]) result.toArray(new String[] {});
     }
     
-    protected void addClassFiles(Set result, File baseDir, File rootDir) {
+    protected void addClassFiles(final Set result, final File baseDir, final SeamWarPackagingContext context) {
+        if (!needsFilter(baseDir, context))
+            return;
+        File rootDir = context.getClassesDirectory();
+        if (hotdeployFilesOnly(baseDir, context)) {
+            result.add(extractWildcardPattern(baseDir, rootDir));
+            return;
+        }
         File[] children = baseDir.listFiles();
-        boolean hasDirectories = hasDirectories(children);
         for (int i = 0; i < children.length; i++) {
-            if (isClassFile(children[i]))
-                result.add(extractPattern(children[i], rootDir, !hasDirectories));
-            else if (children[i].isDirectory())
-                addClassFiles(result, children[i], rootDir);
+            if (children[i].isDirectory())
+                addClassFiles(result, children[i], context);
+            else if (isClassFile(children[i]) && existsInDev(children[i], context))
+                result.add(extractPattern(children[i], rootDir));
         }
     }
     
@@ -94,41 +104,82 @@ public class HotClassesPackagingTask extends ClassesPackagingTask {
     // PRIVATE METHDOS
     // ------------------------------------------------------------------------
     
-    private boolean isClassFile(File file) {
+    private boolean needsFilter(final File target, final SeamWarPackagingContext context) {
+        String mainDirName = context.getClassesDirectory().getAbsolutePath();
+        String targetName = target.getAbsolutePath();
+        String result = targetName.substring(mainDirName.length());
+        return fileExists(context.getHotdeployOutputDirectory(), result);
+    }
+    
+    private boolean hotdeployFilesOnly(final File target, final SeamWarPackagingContext context) {
+        if (visited(target))
+            return visitedSuccess(target);
+        String relativePath = relativePath(target, context.getClassesDirectory());
+        File[] children = target.listFiles();
+        for (int i = 0; i < children.length; i++) {
+            if (children[i].isDirectory()) {
+                boolean hotOnly = hotdeployFilesOnly(children[i], context);
+                directoriesVisited.put(children[i].getAbsolutePath(), Boolean.valueOf(hotOnly));
+                if (!hotOnly)
+                    return false;
+            }
+            if (!new File(context.getHotdeployOutputDirectory()
+                    + File.separator + relativePath 
+                    + File.separator + children[i].getName()).exists())
+                return false;
+        }
+        return true;
+    }
+    
+    private boolean isClassFile(final File file) {
         return file.isFile() && file.getName().endsWith(".class");
     }
     
-    private String extractPattern(File target, File rootDir, boolean useDirectoryPattern) {
-        String rootDirName = rootDir.getAbsolutePath();
-        String targetName = target.getAbsolutePath();
-        String result = targetName.substring(rootDirName.length());
-        if (useDirectoryPattern) {
-            int lastFileSeparator = result.lastIndexOf(File.separator);
-            if (lastFileSeparator > 0)
-                result = result.substring(0, lastFileSeparator);
-        }
+    private String extractWildcardPattern(final File target, final File rootDir) {
+        String result = extractPattern(target, rootDir);
+        return result + "/**";
+    }
+    
+    private String extractPattern(final File target, final File rootDir) {
+        String result = relativePath(target, rootDir);
         if (!"/".equals(File.separator))
             result = replaceToAntPattern(result);
-        if (useDirectoryPattern)
-            result += "**";
         return result;
     }
     
-    private String replaceToAntPattern(String value) {
+    private String replaceToAntPattern(final String value) {
         StringTokenizer tokenizer = new StringTokenizer(value, File.separator);
         String result = "";
         while (tokenizer.hasMoreTokens()) {
-            result += tokenizer.nextToken() + "/";
+            result += tokenizer.nextToken() + (tokenizer.hasMoreTokens() ? "/" : "");
         }
         return result;
     }
     
-    private boolean hasDirectories(File[] files) {
-        for (int i = 0; i < files.length; i++) {
-            if (files[i].isDirectory())
-                return true;
-        }
-        return false;
+    private String relativePath(final File target, final File rootDir) {
+        String rootDirName = rootDir.getAbsolutePath();
+        String targetName = target.getAbsolutePath();
+        String result = targetName.substring(rootDirName.length());
+        return result;
+    }
+    
+    private boolean fileExists(final File dir, final String fileName) {
+        if (!dir.isDirectory())
+            return false;
+        return new File(dir.getAbsolutePath() + File.separator + fileName).exists();
+    }
+    
+    private boolean existsInDev(final File classFile, final SeamWarPackagingContext context) {
+        String relative = relativePath(classFile, context.getClassesDirectory());
+        return fileExists(context.getHotdeployOutputDirectory(), relative);
+    }
+    
+    private boolean visited(final File file) {
+        return directoriesVisited.containsKey(file.getAbsolutePath());
+    }
+    
+    private boolean visitedSuccess(final File file) {
+        return visited(file) && ((Boolean) directoriesVisited.get(file.getAbsolutePath())).booleanValue();
     }
 
 }
