@@ -21,7 +21,7 @@ public class SeamWarProjectPackagingTask extends WarProjectPackagingTask {
     }
     
     // ------------------------------------------------------------------------
-    // PROTECTED METHDOS
+    // PROTECTED METHODS
     // ------------------------------------------------------------------------
     
     protected void handleClassesDirectory(WarPackagingContext context)
