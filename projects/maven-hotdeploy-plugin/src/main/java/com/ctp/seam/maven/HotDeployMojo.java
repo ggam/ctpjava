@@ -56,7 +56,7 @@ public class HotDeployMojo extends CompilerMojo {
     private String deployPath;
     
     // ------------------------------------------------------------------------
-    // PUBLIC METHDOS
+    // PUBLIC METHODS
     // ------------------------------------------------------------------------
 
     /* (non-Javadoc)
@@ -70,7 +70,7 @@ public class HotDeployMojo extends CompilerMojo {
     }
     
     // ------------------------------------------------------------------------
-    // PROTECTED METHDOS
+    // PROTECTED METHODS
     // ------------------------------------------------------------------------
 
     /* (non-Javadoc)
@@ -138,7 +138,7 @@ public class HotDeployMojo extends CompilerMojo {
     }
     
     // ------------------------------------------------------------------------
-    // PRIVATE METHDOS
+    // PRIVATE METHODS
     // ------------------------------------------------------------------------
     
     /**

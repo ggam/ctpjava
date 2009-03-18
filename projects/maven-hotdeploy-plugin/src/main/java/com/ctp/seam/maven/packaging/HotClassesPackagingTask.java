@@ -27,23 +27,38 @@ public class HotClassesPackagingTask extends ClassesPackagingTask {
     private Map directoriesVisited = new HashMap();
     
     // ------------------------------------------------------------------------
-    // PUBLIC METHDOS
+    // PUBLIC METHODS
     // ------------------------------------------------------------------------
 
     public void performPackaging(final WarPackagingContext context)
             throws MojoExecutionException {
         if (context instanceof SeamWarPackagingContext) {
-            performHotPackaging((SeamWarPackagingContext) context);
-            performClassPackaging((SeamWarPackagingContext) context);
+            SeamWarPackagingContext seamContext = (SeamWarPackagingContext) context;
+            if (preconditionsValid(seamContext)) {
+                performHotPackaging(seamContext);
+                performClassPackaging(seamContext);
+            }
         } else {
             super.performPackaging(context);
         }
     }
     
     // ------------------------------------------------------------------------
-    // PROTECTED METHDOS
+    // PROTECTED METHODS
     // ------------------------------------------------------------------------
-    
+
+    protected boolean preconditionsValid(final SeamWarPackagingContext context) {
+        File hotDeployClasses = context.getHotdeployOutputDirectory();
+        if (!hotDeployClasses.exists() && context.isDuplicateClassExclusion()) {
+            context.getLog().warn("Duplicate class filtering is active but this " +
+            		"requires hot deployable classes to be compiled first " +
+            		"[directory " + hotDeployClasses.getAbsolutePath() + " does not exist].");
+            context.getLog().warn("Copy of classes to web module will be skipped.");
+            return false;
+        }
+        return true;
+    }
+
     protected void performHotPackaging(final SeamWarPackagingContext context) throws MojoExecutionException {
         if (context.getHotdeployOutputDirectory().exists()) {
             final PathSet hot = getFilesToIncludes(context.getHotdeployOutputDirectory(), null, null);
@@ -101,7 +116,7 @@ public class HotClassesPackagingTask extends ClassesPackagingTask {
     }
     
     // ------------------------------------------------------------------------
-    // PRIVATE METHDOS
+    // PRIVATE METHODS
     // ------------------------------------------------------------------------
     
     private boolean needsFilter(final File target, final SeamWarPackagingContext context) {

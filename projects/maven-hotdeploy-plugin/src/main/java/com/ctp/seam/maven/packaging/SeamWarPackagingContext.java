@@ -32,7 +32,7 @@ public class SeamWarPackagingContext implements WarPackagingContext {
     }
     
     // ------------------------------------------------------------------------
-    // PUBLIC METHDOS
+    // PUBLIC METHODS
     // ------------------------------------------------------------------------
 
     public File getHotdeployOutputDirectory() {

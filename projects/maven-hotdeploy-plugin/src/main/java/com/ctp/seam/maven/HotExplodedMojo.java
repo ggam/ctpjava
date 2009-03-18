@@ -51,7 +51,7 @@ public class HotExplodedMojo extends WarExplodedMojo {
     private boolean duplicateClassExclusion;
     
     // ------------------------------------------------------------------------
-    // PUBLIC METHDOS
+    // PUBLIC METHODS
     // ------------------------------------------------------------------------
 
     public void execute() throws MojoExecutionException, MojoFailureException {
@@ -60,7 +60,7 @@ public class HotExplodedMojo extends WarExplodedMojo {
     }
     
     // ------------------------------------------------------------------------
-    // PROTECTED METHDOS
+    // PROTECTED METHODS
     // ------------------------------------------------------------------------
 
     protected WarPackagingContext createWarPackagingContext(
