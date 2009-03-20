@@ -1,0 +1,18 @@
+<lifecycles>
+    <lifecycle>
+        <id>hotdeploy</id>
+        <phases>
+            <phase>
+                <id>compile</id>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>exploded</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </phase>
+        </phases>
+    </lifecycle>
+</lifecycles>
