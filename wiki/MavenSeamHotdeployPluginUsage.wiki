@@ -8,6 +8,7 @@ The Seam Hotdeploy plugin allows you to build a Maven WAR project directly into 
 Tested with:
   * JBoss Seam 2.1.1.GA
   * JBoss AS 4.2.3.GA
+  * Maven 2.0.10
 
 == Seam Project Setup ==
 
@@ -88,8 +89,8 @@ Now for the plugin configuration. Create a dedicated build profile in your POM. 
 {{{
 <profile>
     <id>development</id>
-     <build>
-         <defaultGoal>hotdeploy:exploded</defaultGoal>
+    <build>
+        <defaultGoal>hotdeploy:exploded</defaultGoal>
 ...
 }}} 
 
