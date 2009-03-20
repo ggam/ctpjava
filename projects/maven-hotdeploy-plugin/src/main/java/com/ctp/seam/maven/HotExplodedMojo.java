@@ -23,6 +23,7 @@ import com.ctp.seam.maven.packaging.SeamWarProjectPackagingTask;
  * @extendsPlugin war
  * @extendsGoal exploded
  * @goal exploded
+ * @execute lifecycle="hotdeploy" phase="compile"
  * @phase package
  * @requiresProject true
  */
@@ -64,9 +65,9 @@ public class HotExplodedMojo extends WarExplodedMojo {
     // ------------------------------------------------------------------------
 
     protected WarPackagingContext createWarPackagingContext(
-            File webappDirectory, WebappStructure cache,
-            OverlayManager overlayManager, List defaultFilterWrappers,
-            List nonFilteredFileExtensions) {
+            final File webappDirectory, final WebappStructure cache,
+            final OverlayManager overlayManager, final List defaultFilterWrappers,
+            final List nonFilteredFileExtensions) {
         WarPackagingContext ctx = super.createWarPackagingContext(
                 webappDirectory, cache, overlayManager,
                 defaultFilterWrappers, nonFilteredFileExtensions);
