@@ -4,7 +4,7 @@
 Starting reference for Seam Web applications deployed as WAR file.
 
 Features:
- * Seam 2.1.0.SP1
+ * JBoss Seam 2.1.1.GA with RichFaces 3.3.0.GA
  * Building Seam hot deployable code into a different output directory
  * Deploy changed XHTMLs, source code and hot deployable code into a JBoss installation.
 
@@ -228,17 +228,27 @@ Features:
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${java.source.hotdeploy}</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <additionalClasspathElements>
-                        <additionalClasspathElement>
-                            ${project.build.testSourceDirectory}/../bootstrap
-                        </additionalClasspathElement>
-                        <additionalClasspathElement>
-                            ${project.build.sourceDirectory}/../webapp
-                        </additionalClasspathElement>
-                    </additionalClasspathElements>
                     <childDelegation>true</childDelegation>
                     <useSystemClassLoader>true</useSystemClassLoader>
                     <argLine>
@@ -253,66 +263,19 @@ Features:
         <profile>
             <id>local</id>
             <build>
-                <defaultGoal>package</defaultGoal>
-                <testResources>
-                    <testResource>
-                        <directory>${directory.hotdeployables}/WEB-INF/dev</directory>
-                        <filtering>false</filtering>
-                    </testResource>
-                    <testResource>
-                        <directory>${basedir}/src/test/resources</directory>
-                    </testResource>
-                </testResources>
+                <defaultGoal>hotdeploy:exploded</defaultGoal>
                 <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-compiler-plugin</artifactId>
-                        <inherited>true</inherited>
-                        <configuration>
-                            <source>${java.source.version}</source>
-                            <target>${java.source.version}</target>
-                            <excludes>
-                                <exclude>**/session/**</exclude>
-                            </excludes>
-                        </configuration>
-                    </plugin>
                     <plugin>
                         <groupId>com.ctp.seam.maven</groupId>
                         <artifactId>maven-hotdeploy-plugin</artifactId>
-                        <version>0.1.0</version>
+                        <version>0.2.1</version>
                         <configuration>
                             <source>${java.source.version}</source>
                             <target>${java.source.version}</target>
-                            <hotdeployOutputDirectory>${directory.hotdeployables}</hotdeployOutputDirectory>
-                            <includes>
-                                <include>**/session/**</include>
-                            </includes>
+                            <sourceDirectory>${java.source.hotdeploy}</sourceDirectory>
                             <deployDirectory>
                                 ${directory.deploy.jboss}/${build.finalName}.${project.packaging}
                             </deployDirectory>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <phase>compile</phase>
-                                <goals>
-                                    <goal>compile</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-war-plugin</artifactId>
-                        <configuration>
-                            <webResources>
-                                <resource>
-                                    <directory>${directory.hotdeployables}</directory>
-                                    <filtering>false</filtering>
-                                </resource>
-                            </webResources>
-                            <webappDirectory>
-                                ${directory.deploy.jboss}/${build.finalName}.${project.packaging}
-                            </webappDirectory>
                         </configuration>
                     </plugin>
                     <plugin>
@@ -334,7 +297,6 @@ Features:
                 </plugins>
             </build>
             <properties>
-                <directory.hotdeployables>${project.build.directory}/hotdeploy</directory.hotdeployables>
                 <directory.deploy.jboss>/work/servers/jboss/jboss-4.2.3.GA/server/default/deploy</directory.deploy.jboss>
             </properties>
         </profile>
@@ -342,10 +304,11 @@ Features:
 
     <properties>
         <java.source.version>1.5</java.source.version>
-        <jboss.seam.version>2.1.0.SP1</jboss.seam.version>
-        <jboss.richfaces.version>3.2.2.SR1</jboss.richfaces.version>
+        <java.source.hotdeploy>${basedir}/src/main/hot</java.source.hotdeploy>
+        <jboss.seam.version>2.1.1.GA</jboss.seam.version>
+        <jboss.richfaces.version>3.3.0.GA</jboss.richfaces.version>
         <jboss.jbpm-jpdl.version>3.2.3</jboss.jbpm-jpdl.version>
-        <jboss.embedded.version>beta3.SP2</jboss.embedded.version>
+        <jboss.embedded.version>beta3.SP4</jboss.embedded.version>
         <drools.version>4.0.7</drools.version>
         <javax.faces.version>1.2_08</javax.faces.version>
     </properties>
