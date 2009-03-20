@@ -1,4 +1,6 @@
+#summary A complete Maven POM to be used with Seam WAR projects.
 #labels Featured,Phase-Implementation
+
 = Sample Maven POM =
 
 Starting reference for Seam Web applications deployed as WAR file.
@@ -217,7 +219,18 @@ Features:
     </dependencies>
 
     <build>
-        <finalName>mavenseam</finalName>
+        <finalName>${project.artifactId}</finalName>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+            </testResource>
+            <testResource>
+                <directory>src/test/bootstrap</directory>
+            </testResource>
+            <testResource>
+            	<directory>src/main/webapp</directory>
+            </testResource>
+        </testResources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
