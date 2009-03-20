@@ -136,7 +136,7 @@ You can also overwrite the WAR file name if you want to get rid of the version n
 <finalName>${project.artifactId}</finalName>
 }}}
 
-For a complete POM example see the MavenSeamSamplePOM Wiki page.
+For a complete POM example see the [http://code.google.com/p/ctpjava/wiki/MavenSeamSamplePOM sample POM] Wiki page.
 
 
 == Run the Plugin ==
