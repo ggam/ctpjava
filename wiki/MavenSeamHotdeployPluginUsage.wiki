@@ -1,7 +1,7 @@
 #summary How to use the Seam hotdeploy Maven plugin
 #labels Featured
 
-= Maven Seam Hotdeploy Plugin Usage =
+= Seam Hotdeploy Maven Plugin Usage =
 
 The Seam Hotdeploy plugin allows you to build a Maven WAR project directly into a JBoss installation. This includes copying config files as well as XHTML/JSPs, and taking care about copying hot deployable classes into `WEB-INF/dev` instead of `WEB-INF/classes`.
 
