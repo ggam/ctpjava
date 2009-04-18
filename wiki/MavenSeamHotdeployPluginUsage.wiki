@@ -147,3 +147,5 @@ On the command line simply type `mvn -P development`. This will deploy your WAR 
 {{{
 mvn -P development clean hotdeploy:exploded
 }}}
+
+If you have a multi-module project, make sure this is only run on the web module.
