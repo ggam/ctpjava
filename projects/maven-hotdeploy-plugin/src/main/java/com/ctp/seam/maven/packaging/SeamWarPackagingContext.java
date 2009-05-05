@@ -7,6 +7,7 @@ import java.io.File;
 import java.util.List;
 
 import org.apache.maven.archiver.MavenArchiveConfiguration;
+import org.apache.maven.artifact.factory.ArtifactFactory;
 import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugin.war.packaging.WarPackagingContext;
 import org.apache.maven.plugin.war.util.WebappStructure;
@@ -181,6 +182,13 @@ public class SeamWarPackagingContext implements WarPackagingContext {
      */
     public boolean isNonFilteredExtension(String fileName) {
         return wrapped.isNonFilteredExtension(fileName);
+    }
+
+    /**
+     * @see org.apache.maven.plugin.war.packaging.WarPackagingContext#getArtifactFactory()
+     */
+    public ArtifactFactory getArtifactFactory() {
+        return wrapped.getArtifactFactory();
     }
 
 }

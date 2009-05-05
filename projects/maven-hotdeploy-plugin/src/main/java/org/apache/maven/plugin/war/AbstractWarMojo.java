@@ -28,6 +28,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.maven.archiver.MavenArchiveConfiguration;
+import org.apache.maven.artifact.factory.ArtifactFactory;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.model.Resource;
 import org.apache.maven.plugin.AbstractMojo;
@@ -47,18 +48,31 @@ import org.apache.maven.plugin.war.util.WebappStructureSerializer;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.shared.filtering.MavenFileFilter;
 import org.apache.maven.shared.filtering.MavenFilteringException;
+import org.apache.maven.shared.filtering.MavenResourcesExecution;
 import org.apache.maven.shared.filtering.MavenResourcesFiltering;
 import org.codehaus.plexus.archiver.jar.JarArchiver;
 import org.codehaus.plexus.archiver.manager.ArchiverManager;
 import org.codehaus.plexus.util.StringUtils;
 
 /**
- * Contains commons jobs for war mojos
- * @version $Id: AbstractWarMojo.java 682924 2008-08-05 20:16:53Z hboutemy $
+ * Contains commons jobs for war mojos.
+ *
+ * @version $Id: AbstractWarMojo.java 751806 2009-03-09 19:44:08Z dennisl $
  */
 public abstract class AbstractWarMojo
     extends AbstractMojo
 {
+    public static final String DEFAULT_FILE_NAME_MAPPING = "@{artifactId}@-@{version}@.@{extension}@";
+
+    public static final String DEFAULT_FILE_NAME_MAPPING_CLASSIFIER =
+        "@{artifactId}@-@{version}@-@{classifier}@.@{extension}@";
+
+    private static final String[] EMPTY_STRING_ARRAY = {};
+
+    private static final String META_INF = "META-INF";
+
+    private static final String WEB_INF = "WEB-INF";
+
     /**
      * The maven project.
      *
@@ -83,6 +97,7 @@ public abstract class AbstractWarMojo
      * and the classes directory will then be excluded from the webapp.
      *
      * @parameter expression="${archiveClasses}" default-value="false"
+     * @since 2.0.1
      */
     private boolean archiveClasses;
 
@@ -151,7 +166,7 @@ public abstract class AbstractWarMojo
      * set (default) the file is copied with its standard name.
      *
      * @parameter
-     * @since 2.0.3
+     * @since 2.1-alpha-1
      */
     private String outputFileNameMapping;
 
@@ -160,7 +175,7 @@ public abstract class AbstractWarMojo
      *
      * @parameter expression="${project.build.directory}/war/work/webapp-cache.xml"
      * @required
-     * @since 2.1
+     * @since 2.1-alpha-1
      */
     private File cacheFile;
 
@@ -169,9 +184,16 @@ public abstract class AbstractWarMojo
      * accross multiple runs.
      *
      * @parameter expression="${useCache}" default-value="true"
-     * @since 2.1
+     * @since 2.1-alpha-1
      */
     private boolean useCache = true;
+
+    /**
+     * @component role="org.apache.maven.artifact.factory.ArtifactFactory"
+     * @required
+     * @readonly
+     */
+    private ArtifactFactory artifactFactory;
 
     /**
      * To look up Archiver/UnArchiver implementations
@@ -194,15 +216,6 @@ public abstract class AbstractWarMojo
      * @required
      */
     private MavenResourcesFiltering mavenResourcesFiltering;
-
-    private static final String WEB_INF = "WEB-INF";
-
-    private static final String META_INF = "META-INF";
-
-    public static final String DEFAULT_FILE_NAME_MAPPING_CLASSIFIER =
-        "@{artifactId}@-@{version}@-@{classifier}@.@{extension}@";
-
-    public static final String DEFAULT_FILE_NAME_MAPPING = "@{artifactId}@-@{version}@.@{extension}@";
 
     /**
      * The comma separated list of tokens to include when copying content
@@ -273,14 +286,22 @@ public abstract class AbstractWarMojo
      * @since 2.1-alpha-2
      */
     private boolean filteringDeploymentDescriptors = false;
-    
+
     /**
-     * To escape interpolated value with windows path 
-     * c:\foo\bar will be replace with c\:\\foo\\bar
+     * To escape interpolated value with windows path
+     * c:\foo\bar will be replaced with c:\\foo\\bar
      * @parameter expression="${maven.war.escapedBackslashesInFilePath}" default-value="false"
      * @since 2.1-alpha-2
-     */    
+     */
     private boolean escapedBackslashesInFilePath = false;
+
+    /**
+     * Expression preceded with the String won't be interpolated
+     * \${foo} will be replaced with ${foo}
+     * @parameter expression="${maven.war.escapeString}"
+     * @since 2.1-beta-1
+     */
+    protected String escapeString;
 
     /**
      * The archive configuration to use.
@@ -289,8 +310,6 @@ public abstract class AbstractWarMojo
      * @parameter
      */
     private MavenArchiveConfiguration archive = new MavenArchiveConfiguration();
-
-    private static final String[] EMPTY_STRING_ARRAY = {};
 
     private final WebappStructureSerializer webappStructureSerialier = new WebappStructureSerializer();
 
@@ -417,10 +436,13 @@ public abstract class AbstractWarMojo
         List defaultFilterWrappers = null;
         try
         {
+            MavenResourcesExecution mavenResourcesExecution = new MavenResourcesExecution();
+            mavenResourcesExecution.setEscapeString( escapeString );
+
             defaultFilterWrappers = mavenFileFilter.getDefaultFilterWrappers( project, filters,
-                                                                                   escapedBackslashesInFilePath,
-                                                                                   this.session );
-            
+                                                                              escapedBackslashesInFilePath,
+                                                                              this.session, mavenResourcesExecution );
+
         }
         catch ( MavenFilteringException e )
         {
@@ -429,8 +451,7 @@ public abstract class AbstractWarMojo
         }
 
         final WarPackagingContext context = createWarPackagingContext(webappDirectory, cache, overlayManager,
-                                                                            defaultFilterWrappers,
-                                                                            getNonFilteredFileExtensions());
+                    defaultFilterWrappers, getNonFilteredFileExtensions());
         final Iterator it = packagingTasks.iterator();
         while ( it.hasNext() )
         {
@@ -447,7 +468,7 @@ public abstract class AbstractWarMojo
             task.performPostPackaging( context );
 
         }
-        getLog().info( "Webapp assembled in[" + ( System.currentTimeMillis() - startTime ) + " msecs]" );
+        getLog().info( "Webapp assembled in [" + ( System.currentTimeMillis() - startTime ) + " msecs]" );
 
     }
     
@@ -457,7 +478,7 @@ public abstract class AbstractWarMojo
         return new DefaultWarPackagingContext( webappDirectory, cache, overlayManager,
                 defaultFilterWrappers,
                 getNonFilteredFileExtensions(),
-                filteringDeploymentDescriptors );
+                filteringDeploymentDescriptors, artifactFactory);
     }
 
     /**
@@ -523,6 +544,7 @@ public abstract class AbstractWarMojo
         implements WarPackagingContext
     {
 
+        private final ArtifactFactory artifactFactory;
 
         private final WebappStructure webappStructure;
 
@@ -538,12 +560,14 @@ public abstract class AbstractWarMojo
 
         public DefaultWarPackagingContext( File webappDirectory, final WebappStructure webappStructure,
                                            final OverlayManager overlayManager, List filterWrappers,
-                                           List nonFilteredFileExtensions, boolean filteringDeploymentDescriptors )
+                                           List nonFilteredFileExtensions, boolean filteringDeploymentDescriptors,
+                                           ArtifactFactory artifactFactory )
         {
             this.webappDirectory = webappDirectory;
             this.webappStructure = webappStructure;
             this.overlayManager = overlayManager;
             this.filterWrappers = filterWrappers;
+            this.artifactFactory = artifactFactory;
             this.filteringDeploymentDescriptors = filteringDeploymentDescriptors;
             this.nonFilteredFileExtensions = nonFilteredFileExtensions == null ? Collections.EMPTY_LIST
                                                                               : nonFilteredFileExtensions;
@@ -655,6 +679,11 @@ public abstract class AbstractWarMojo
         public boolean isFilteringDeploymentDescriptors()
         {
             return filteringDeploymentDescriptors;
+        }
+
+        public ArtifactFactory getArtifactFactory()
+        {
+            return this.artifactFactory;
         }
 
     }
@@ -848,5 +877,15 @@ public abstract class AbstractWarMojo
     public void setNonFilteredFileExtensions( List nonFilteredFileExtensions )
     {
         this.nonFilteredFileExtensions = nonFilteredFileExtensions;
+    }
+
+    public ArtifactFactory getArtifactFactory()
+    {
+        return this.artifactFactory;
+    }
+
+    public void setArtifactFactory( ArtifactFactory artifactFactory )
+    {
+        this.artifactFactory = artifactFactory;
     }
 }
