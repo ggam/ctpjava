@@ -36,6 +36,11 @@ Features:
             <name>CTP Public Repository</name>
             <url>http://ctpjava.googlecode.com/svn/trunk/repository</url>
         </pluginRepository>
+        <pluginRepository>
+            <id>repository.jboss.org</id>
+            <name>JBoss Repository</name>
+            <url>http://repository.jboss.org/maven2</url>
+        </pluginRepository>
     </pluginRepositories>
 
     <dependencies>
@@ -267,6 +272,16 @@ Features:
                     <argLine>
                         -Dsun.lang.ClassLoader.allowArraySyntax=true
                     </argLine>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!-- run with 'mvn cli:execute-phase' and use 'hot' -->
+                <groupId>org.twdata.maven</groupId>
+                <artifactId>maven-cli-plugin</artifactId>
+                <configuration>
+                    <userAliases>
+                        <hot>hotdeploy:exploded -o -Plocal</hot>
+                    </userAliases>
                 </configuration>
             </plugin>
         </plugins>
