@@ -30,7 +30,7 @@ src
 
 == Project POM Configuration ==
 
-Add the following plugin repository to your POM:
+Add the following plugin repositories to your POM:
 
 {{{
 <pluginRepositories>
@@ -39,10 +39,15 @@ Add the following plugin repository to your POM:
         <name>CTP Public Repository</name>
         <url>http://ctpjava.googlecode.com/svn/trunk/repository</url>
     </pluginRepository>
+    <pluginRepository>
+        <id>repository.jboss.org</id>
+        <name>JBoss Repository</name>
+        <url>http://repository.jboss.org/maven2</url>
+    </pluginRepository>
 </pluginRepositories>
 }}}
 
-Use the build helper plugin to add the `hot` source folder to your Maven build:
+Use the build helper plugin to add the `hot` source folder to your Maven build, and integrate the CLI plugin for much more build convenience:
 
 {{{
 <plugin>
@@ -62,6 +67,16 @@ Use the build helper plugin to add the `hot` source folder to your Maven build:
             </configuration>
         </execution>
     </executions>
+</plugin>
+<plugin>
+    <groupId>org.twdata.maven</groupId>
+    <artifactId>maven-cli-plugin</artifactId>
+    <configuration>
+        <userAliases>
+            <hot>hotdeploy:exploded -o -Pdevelopment</hot>
+            <cln>clean -o -Pdevelopment</cln>
+        </userAliases>
+    </configuration>
 </plugin>
 }}}
 
@@ -142,10 +157,22 @@ For a complete POM example see the [http://code.google.com/p/ctpjava/wiki/MavenS
 
 == Run the Plugin ==
 
-On the command line simply type `mvn -P development`. This will deploy your WAR file into the JBoss deploy folder. If you need to clean out your running application first, use
+On the command line, first type
 
 {{{
-mvn -P development clean hotdeploy:exploded
+mvn cli:execute-phase
+}}}
+
+which starts a 'Maven shell' from the CLI plugin, speeding up reexecutions. From here, start the build with the alias 
+
+{{{
+maven2> hot
+}}}
+
+(which stands for `mvn hotdeploy:exploded -P development`). This will deploy your WAR file into the JBoss deploy folder. If you need to clean out your running application first, use
+
+{{{
+maven2> cln hot
 }}}
 
 If you have a multi-module project, make sure this is only run on the web module.
