@@ -14,8 +14,7 @@ import org.apache.maven.plugin.ear.EarMojo;
  * 
  * @extendsPlugin ear
  * @extendsGoal ear
- * @goal ear-exploded
- * @execute lifecycle="hotdeploy" phase="package"
+ * @goal hot-ear
  * @phase package
  * @requiresProject true
  */
@@ -34,8 +33,10 @@ public class HotEarMojo extends EarMojo {
     // ------------------------------------------------------------------------
     
     public void execute() throws MojoExecutionException, MojoFailureException {
-        setWorkDirectory(deployDirectory);
-        super.execute();
+        if (supportsPackaging()) {
+            setWorkDirectory(deployDirectory);
+            super.execute();
+        }
     }
 
     // ------------------------------------------------------------------------
@@ -43,6 +44,10 @@ public class HotEarMojo extends EarMojo {
     // ------------------------------------------------------------------------
 
     protected void performPackaging() throws MojoExecutionException {
+    }
+    
+    protected boolean supportsPackaging() {
+        return "ear".equals(getProject().getPackaging().toLowerCase());
     }
 
 }

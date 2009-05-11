@@ -29,7 +29,7 @@ import org.codehaus.plexus.util.StringUtils;
 /**
  *
  * @author Stephane Nicoll
- * @version $Id: WarUtils.java 682073 2008-08-02 22:32:18Z dennisl $
+ * @version $Id: WarUtils.java 743348 2009-02-11 14:40:19Z dennisl $
  */
 public class WarUtils
 {
@@ -117,13 +117,11 @@ public class WarUtils
         {
             return false;
         }
-        
         if ( first.getClassifier() != null ? !first.getClassifier().equals( second.getClassifier() )
             : second.getClassifier() != null )
         {
             return false;
         }
-
         if ( !StringUtils.equals( first.getGroupId(), second.getGroupId() ) )
         {
             return false;

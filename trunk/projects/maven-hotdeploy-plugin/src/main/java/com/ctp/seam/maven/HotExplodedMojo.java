@@ -22,8 +22,7 @@ import com.ctp.seam.maven.packaging.SeamWarProjectPackagingTask;
  * 
  * @extendsPlugin war
  * @extendsGoal exploded
- * @goal exploded
- * @execute lifecycle="hotdeploy" phase="compile"
+ * @goal war-exploded
  * @phase package
  * @requiresProject true
  */

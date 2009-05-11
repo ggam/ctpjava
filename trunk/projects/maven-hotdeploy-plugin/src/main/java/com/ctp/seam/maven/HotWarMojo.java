@@ -7,6 +7,8 @@ package com.ctp.seam.maven;
 import java.io.File;
 import java.util.List;
 
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.war.WarMojo;
 import org.apache.maven.plugin.war.overlay.OverlayManager;
 import org.apache.maven.plugin.war.packaging.WarPackagingContext;
@@ -21,12 +23,11 @@ import com.ctp.seam.maven.packaging.SeamWarProjectPackagingTask;
  * 
  * @extendsPlugin war
  * @extendsGoal war
- * @goal war
- * @execute lifecycle="hotdeploy" phase="compile"
- * @phase package
+ * @goal hot-war
+ * @phase prepare-package
  * @requiresProject true
  */
-public class HotPackagedMojo extends WarMojo {
+public class HotWarMojo extends WarMojo {
 
     /**
      * Where to put the hot deployable compiler output.
@@ -43,8 +44,21 @@ public class HotPackagedMojo extends WarMojo {
     private boolean duplicateClassExclusion;
     
     // ------------------------------------------------------------------------
+    // PUBLIC METHODS
+    // ------------------------------------------------------------------------
+    
+    public void execute() throws MojoExecutionException, MojoFailureException {
+        if (supportsPackaging())
+            super.execute();
+    }
+    
+    // ------------------------------------------------------------------------
     // PROTECTED METHODS
     // ------------------------------------------------------------------------
+    
+    protected boolean supportsPackaging() {
+        return "war".equals(getProject().getPackaging().toLowerCase());
+    }
 
     protected WarPackagingContext createWarPackagingContext(
             final File webappDirectory, final WebappStructure cache,

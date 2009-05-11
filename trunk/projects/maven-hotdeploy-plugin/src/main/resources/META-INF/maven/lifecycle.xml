@@ -8,7 +8,18 @@
                     <execution>
                         <goals>
                             <goal>compile</goal>
-                            <goal>exploded</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </phase>
+            <phase>
+                <id>prepare-package</id>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>war-exploded</goal>
+                            <goal>hot-war</goal>
+                            <goal>hot-ear</goal>
                         </goals>
                     </execution>
                 </executions>
