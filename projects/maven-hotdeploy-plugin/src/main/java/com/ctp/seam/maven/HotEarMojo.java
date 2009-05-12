@@ -14,8 +14,8 @@ import org.apache.maven.plugin.ear.EarMojo;
  * 
  * @extendsPlugin ear
  * @extendsGoal ear
- * @goal hot-ear
- * @phase package
+ * @goal ear-prepare-package
+ * @phase prepare-package
  * @requiresProject true
  */
 public class HotEarMojo extends EarMojo {

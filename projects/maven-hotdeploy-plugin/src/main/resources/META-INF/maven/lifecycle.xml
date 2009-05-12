@@ -8,6 +8,7 @@
                     <execution>
                         <goals>
                             <goal>compile</goal>
+                            <goal>war-exploded</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -17,9 +18,22 @@
                 <executions>
                     <execution>
                         <goals>
-                            <goal>war-exploded</goal>
-                            <goal>hot-war</goal>
-                            <goal>hot-ear</goal>
+                            <goal>war-package</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </phase>
+        </phases>
+    </lifecycle>
+    <lifecycle>
+        <id>hotdeploy-ear</id>
+        <phases>
+            <phase>
+                <id>prepare-package</id>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>ear-prepare-package</goal>
                         </goals>
                     </execution>
                 </executions>
