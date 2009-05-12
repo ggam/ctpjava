@@ -17,7 +17,7 @@ import org.apache.maven.plugin.MojoFailureException;
  * @phase prepare-package
  * @requiresProject true
  */
-public class PackageMojo extends AbstractMojo {
+public class WarPackageMojo extends AbstractMojo {
 
     public void execute() throws MojoExecutionException, MojoFailureException {
     }

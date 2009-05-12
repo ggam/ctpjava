@@ -23,7 +23,7 @@ import com.ctp.seam.maven.packaging.SeamWarProjectPackagingTask;
  * 
  * @extendsPlugin war
  * @extendsGoal war
- * @goal hot-war
+ * @goal war-package
  * @phase prepare-package
  * @requiresProject true
  */
