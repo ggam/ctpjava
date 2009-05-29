@@ -9,15 +9,15 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 
 /**
- * Simple Mojo to execute the custom package lifecycle.
+ * Simple Mojo to execute the custom compile lifecycle
  * @author  Thomas Hug
  * 
- * @goal package
- * @execute lifecycle="hotdeploy" phase="prepare-package"
- * @phase prepare-package
+ * @goal exploded
+ * @execute lifecycle="hotdeploy" phase="compile"
+ * @phase package
  * @requiresProject true
  */
-public class WarPackageMojo extends AbstractMojo {
+public class ExplodedMojo extends AbstractMojo {
 
     public void execute() throws MojoExecutionException, MojoFailureException {
     }

@@ -13,31 +13,6 @@
                     </execution>
                 </executions>
             </phase>
-            <phase>
-                <id>prepare-package</id>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>war-package</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </phase>
-        </phases>
-    </lifecycle>
-    <lifecycle>
-        <id>hotdeploy-ear</id>
-        <phases>
-            <phase>
-                <id>prepare-package</id>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>ear-prepare-package</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </phase>
         </phases>
     </lifecycle>
 </lifecycles>

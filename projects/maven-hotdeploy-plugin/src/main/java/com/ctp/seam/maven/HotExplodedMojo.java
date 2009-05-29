@@ -25,6 +25,7 @@ import com.ctp.seam.maven.packaging.SeamWarProjectPackagingTask;
  * @goal war-exploded
  * @phase package
  * @requiresProject true
+ * @requiresDependencyResolution runtime
  */
 public class HotExplodedMojo extends WarExplodedMojo {
     
@@ -38,7 +39,7 @@ public class HotExplodedMojo extends WarExplodedMojo {
     /**
      * The directory the application gets deployed in. Not the app server directory,
      * directly the application directory containing the /WEB-INF directory.
-     * @parameter
+     * @parameter default-value="${project.build.directory}/${project.build.finalName}"
      * @required
      */
     private File deployDirectory;
