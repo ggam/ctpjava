@@ -2,7 +2,7 @@
 
 = Seam Hotdeploy Maven Plugin - Usage with EAR Projects =
 
-If you want to use a Seam WAR module within an EAR project, you can do this by using a specific packaging type the plugin defines. 
+If you want to use a [MavenSeamHotdeployPluginUsage Seam WAR module] within an EAR project, you can do this by using a specific packaging type the plugin defines. 
 
 == Parent POM Configuration ==
 
