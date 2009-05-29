@@ -9,7 +9,7 @@
             <configuration>
                 <extension>war</extension>
                 <type>seam-war</type>
-                <packaging>war</packaging>
+                <packaging>seam-war</packaging>
                 <language>java</language>
                 <addedToClasspath>true</addedToClasspath>
                 <includesDependencies>true</includesDependencies>
