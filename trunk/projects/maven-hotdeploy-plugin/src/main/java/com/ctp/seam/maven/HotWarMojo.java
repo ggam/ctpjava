@@ -23,9 +23,10 @@ import com.ctp.seam.maven.packaging.SeamWarProjectPackagingTask;
  * 
  * @extendsPlugin war
  * @extendsGoal war
- * @goal war-package
- * @phase prepare-package
+ * @goal package
+ * @phase package
  * @requiresProject true
+ * @requiresDependencyResolution runtime
  */
 public class HotWarMojo extends WarMojo {
 
@@ -57,7 +58,7 @@ public class HotWarMojo extends WarMojo {
     // ------------------------------------------------------------------------
     
     protected boolean supportsPackaging() {
-        return "war".equals(getProject().getPackaging().toLowerCase());
+        return true; //"war".equals(getProject().getPackaging().toLowerCase());
     }
 
     protected WarPackagingContext createWarPackagingContext(

@@ -24,7 +24,7 @@ import org.apache.maven.plugin.MojoExecutionException;
  * @phase compile
  * @requiresProject true
  */
-public class HotDeployMojo extends CompilerMojo {
+public class HotCompileMojo extends CompilerMojo {
 
     /**
      * Where to look for the hot deployable sources.
@@ -43,7 +43,7 @@ public class HotDeployMojo extends CompilerMojo {
     /**
      * The directory the application gets deployed in. Not the app server directory,
      * directly the application directory containing the /WEB-INF directory.
-     * @parameter
+     * @parameter default-value="${project.build.directory}/${project.build.finalName}"
      * @required
      */
     private String deployDirectory;
@@ -148,7 +148,7 @@ public class HotDeployMojo extends CompilerMojo {
      * @param source            Source folder - not changed.
      * @param target            Target folder - changed according to sync rules.
      */
-    private void synchFolders(File source, File target) {
+    private void synchFolders(final File source, final File target) {
         File[] deployed = target.listFiles();
         Map sourceContent = contentAsMap(source);
         for (int i = 0; i < deployed.length; i++) {
@@ -173,7 +173,7 @@ public class HotDeployMojo extends CompilerMojo {
      * @param file              File to be deleted, including the children.
      * @return                  {@code true} for success.
      */
-    private boolean delete(File file) {
+    private boolean delete(final File file) {
         if (file.isDirectory()) {
             File[] children = file.listFiles();
             for (int i = 0; i < children.length; i++) {
@@ -193,7 +193,7 @@ public class HotDeployMojo extends CompilerMojo {
      * @param dir               Directory to extract content.
      * @return                  Map instance.
      */
-    private Map contentAsMap(File dir) {
+    private Map contentAsMap(final File dir) {
         File[] content = dir.listFiles();
         Map result = new HashMap();
         for (int i = 0; i < content.length; i++) {
