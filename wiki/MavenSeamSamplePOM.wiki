@@ -6,7 +6,7 @@
 Starting reference for Seam Web applications deployed as WAR file.
 
 Features:
- * JBoss Seam 2.1.1.GA with RichFaces 3.3.0.GA
+ * JBoss Seam 2.1.1.GA with RichFaces 3.3.1.GA
  * Building Seam hot deployable code into a different output directory
  * Deploy changed XHTMLs, source code and hot deployable code into a JBoss installation.
 
@@ -334,7 +334,7 @@ Features:
         <java.source.version>1.5</java.source.version>
         <java.source.hotdeploy>${basedir}/src/main/hot</java.source.hotdeploy>
         <jboss.seam.version>2.1.1.GA</jboss.seam.version>
-        <jboss.richfaces.version>3.3.0.GA</jboss.richfaces.version>
+        <jboss.richfaces.version>3.3.1.GA</jboss.richfaces.version>
         <jboss.jbpm-jpdl.version>3.2.3</jboss.jbpm-jpdl.version>
         <jboss.embedded.version>beta3.SP4</jboss.embedded.version>
         <drools.version>4.0.7</drools.version>
