@@ -27,6 +27,7 @@ src
         |-- bootstrap  (Embeddable JBoss config files)
 }}}
 
+*UPDATE*: For embedding the WAR inside an EAR, see [SeamHotdeployPluginEARConfiguration further descriptions here].
 
 == Project POM Configuration ==
 
