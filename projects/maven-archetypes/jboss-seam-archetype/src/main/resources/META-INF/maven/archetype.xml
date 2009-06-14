@@ -2,13 +2,96 @@
 <archetype>
   <id>jboss-seam-archetype</id>
   <resources>
+    <resource>environment/filters/jboss-seam-archetype-development.properties</resource>
+  
+    <!-- CONFIG MODULE -->
     <resource>jboss-seam-archetype-jbossconfig/pom.xml</resource>
     <resource>jboss-seam-archetype-jbossconfig/src/main/resources/archetype.properties</resource>
     <resource>jboss-seam-archetype-jbossconfig/src/main/resources/default/deploy/jboss-seam-archetype-ds.xml</resource>
+    
+    <!-- WEB MODULE -->
     <resource>jboss-seam-archetype-webapp/pom.xml</resource>
-    <resource>jboss-seam-archetype-webapp/src/main/resources/META-INF/spring/module-context.xml</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/resources/components.properties</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/resources/messages_bg.properties</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/resources/messages_de.properties</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/resources/messages_en.properties</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/resources/messages_fr.properties</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/resources/messages_it.properties</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/resources/messages_tr.properties</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/resources/seam.properties</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/resources/security.drl</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/resources/META-INF/components.xml</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/resources/META-INF/orm.xml</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/resources/META-INF/persistence.xml</resource>
+    
     <resource>jboss-seam-archetype-webapp/src/main/webapp/index.html</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/error.xhtml</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/favicon.ico</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/home.xhtml</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/login.page.xml</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/login.xhtml</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/img/btnmanageroles.png</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/img/btnmanageusers.png</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/img/btnnewpermission.png</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/img/btnnewrole.png</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/img/btnnewuser.png</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/img/dtpick.gif</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/img/error.gif</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/img/false.png</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/img/manytoone.gif</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/img/msgerror.png</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/img/msginfo.png</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/img/msgwarn.png</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/img/onetomany.gif</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/img/seamlogo.png</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/img/true.png</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/layout/display.xhtml</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/layout/edit.xhtml</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/layout/menu.xhtml</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/layout/sort.xhtml</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/layout/template.xhtml</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/stylesheet/theme.css</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/stylesheet/theme.xcss</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/stylesheet/useradmin.css</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/WEB-INF/faces-config.xml</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/WEB-INF/jboss-web.xml</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/WEB-INF/pages.xml</resource>
     <resource>jboss-seam-archetype-webapp/src/main/webapp/WEB-INF/web.xml</resource>
-    <resource>jboss-seam-archetype-webapp/src/test/resources/log4j.xml</resource>
+
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/commons-logging.properties</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/jndi.properties</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/log4j.properties</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/conf/bootstrap-beans.xml</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/conf/jboss-service.xml</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/conf/jboss-jta-properties</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/conf/login-config.xml</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/conf/props/messaging-roles.properties</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/conf/props/messaging-users.properties</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/deploy/ejb3-interceptors-aop.xml</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/deploy/hsqldb-ds.xml</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/deploy/jboss-local-jdbc.rar</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/deploy/jboss-xa-jdbc.rar</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/deploy/jms-ra.rar</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/deploy/remoting-service.xml</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/deploy/messaging/connection-factories-service.xml</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/deploy/messaging/destinations-service.xml</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/deploy/messaging/hsqldb-persistence-service.xml</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/deploy/messaging/jms-ds.xml</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/deploy/messaging/legacy-service.xml</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/deploy/messaging/messaging-service.xml</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/deploy/messaging/remoting-service.xml</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/deployers/aspect-deployer-beans.xml</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/deployers/ejb-deployer-beans.xml</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/deployers/jboss-aspect-library-beans.xml</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/deployers/jca-deployers-beans.xml</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/deployers/metadata-beans.xml</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/deployers/security-deployer-beans.xml</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/bootstrap/META-INF/persistence.properties</resource>
+    
+    <resource>jboss-seam-archetype-webapp/src/test/resources/seam.properties</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/resources/testng-all.xml</resource>
   </resources>
+  <sources>
+      <source>jboss-seam-archetype-webapp/src/main/hot/Authenticator.java</source>
+  </sources>
 </archetype>

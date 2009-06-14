@@ -1,38 +1,94 @@
-<?xml version="1.0" encoding="UTF-8"?><archetype-descriptor name="archetype">
-  <modules>
-    <module id="${rootArtifactId}-jbossconfig" dir="__rootArtifactId__-jbossconfig" name="${rootArtifactId}-jbossconfig">
-      <fileSets>
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor name="archetype">
+    <requiredProperties>
+        <requiredProperty key="serverType">
+            <defaultValue>jboss</defaultValue>
+        </requiredProperty>
+        <requiredProperty key="serverDir">
+            <!-- defaultValue>/usr/local/jboss</defaultValue -->
+        </requiredProperty>
+    </requiredProperties>
+    <fileSets>
         <fileSet filtered="true" encoding="UTF-8">
-          <directory>src/main/resources</directory>
-          <includes>
-            <include>**/*.xml</include>
-            <include>**/*.properties</include>
-          </includes>
+            <directory>environment/filters</directory>
+            <includes>
+                <include>**/*.properties</include>
+            </includes>
         </fileSet>
-      </fileSets>
-    </module>
-    <module id="${rootArtifactId}-webapp" dir="__rootArtifactId__-webapp" name="${rootArtifactId}-webapp">
-      <fileSets>
-        <fileSet filtered="true" encoding="UTF-8">
-          <directory>src/main/webapp</directory>
-          <includes>
-            <include>**/*.html</include>
-            <include>**/*.xml</include>
-          </includes>
-        </fileSet>
-        <fileSet filtered="true" encoding="UTF-8">
-          <directory>src/main/resources</directory>
-          <includes>
-            <include>**/*.xml</include>
-          </includes>
-        </fileSet>
-        <fileSet filtered="true" encoding="UTF-8">
-          <directory>src/test/resources</directory>
-          <includes>
-            <include>**/*.xml</include>
-          </includes>
-        </fileSet>
-      </fileSets>
-    </module>
-  </modules>
+    </fileSets>
+    <modules>
+        <module id="${rootArtifactId}-jbossconfig" dir="__rootArtifactId__-jbossconfig" name="${rootArtifactId}-jbossconfig">
+            <fileSets>
+                <fileSet filtered="true" encoding="UTF-8">
+                    <directory>src/main/resources</directory>
+                    <includes>
+                        <include>**/*.xml</include>
+                        <include>**/*.properties</include>
+                    </includes>
+                </fileSet>
+            </fileSets>
+        </module>
+        <module id="${rootArtifactId}-webapp" dir="__rootArtifactId__-webapp" name="${rootArtifactId}-webapp">
+            <fileSets>
+                <fileSet filtered="true" encoding="UTF-8" packaged="true">
+                    <directory>src/main/hot</directory>
+                    <includes>
+                        <include>**/*.java</include>
+                    </includes>
+                </fileSet>
+                <fileSet filtered="true" encoding="UTF-8" packaged="true">
+                    <directory>src/main/java</directory>
+                    <includes>
+                        <include>**/*.java</include>
+                    </includes>
+                </fileSet>
+                <fileSet filtered="true" encoding="UTF-8">
+                    <directory>src/main/webapp</directory>
+                    <includes>
+                        <include>**/*.html</include>
+                        <include>**/*.xml</include>
+                        <include>**/*.xhtml</include>
+                        <include>**/*.css</include>
+                        <include>**/*.xcss</include>
+                    </includes>
+                </fileSet>
+                <fileSet filtered="false">
+                    <directory>src/main/webapp</directory>
+                    <includes>
+                        <include>**/*.gif</include>
+                        <include>**/*.png</include>
+                        <include>**/*.ico</include>
+                    </includes>
+                </fileSet>
+                <fileSet filtered="true" encoding="UTF-8">
+                    <directory>src/main/resources</directory>
+                    <includes>
+                        <include>**/*.xml</include>
+                        <include>**/*.properties</include>
+                        <include>**/*.drl</include>
+                    </includes>
+                </fileSet>
+                <fileSet filtered="true" encoding="UTF-8">
+                    <directory>src/test/resources</directory>
+                    <includes>
+                        <include>**/*.xml</include>
+                        <include>**/*.properties</include>
+                    </includes>
+                </fileSet>
+                <fileSet filtered="true" encoding="UTF-8">
+                    <directory>src/test/bootstrap</directory>
+                    <includes>
+                        <include>**/*.xml</include>
+                        <include>**/*.properties</include>
+                    </includes>
+                </fileSet>
+                <fileSet filtered="false">
+                    <directory>src/test/bootstrap</directory>
+                    <includes>
+                        <include>**/*.rar</include>
+                    </includes>
+                </fileSet>
+            </fileSets>
+        </module>
+    </modules>
 </archetype-descriptor>

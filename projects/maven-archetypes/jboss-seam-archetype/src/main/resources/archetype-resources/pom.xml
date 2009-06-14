@@ -1,15 +1,71 @@
+#set( $pound = '#' )
+#set( $dollar = '$' )
+#set( $escape = '\' )
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                       http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>${groupId}</groupId>
-  <artifactId>${artifactId}</artifactId>
-  <name>${project.artifactId}</name>
-  <version>${version}</version>
-  <packaging>pom</packaging>
-
-  <dependencyManagement>
-
-  </dependencyManagement>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>${groupId}</groupId>
+    <artifactId>${artifactId}</artifactId>
+    <name>[${dollar}{project.artifactId}]</name>
+    <version>${version}</version>
+    <packaging>pom</packaging>
+    
+    <modules>
+        <module>${artifactId}-jbossconfig</module>
+        <module>${artifactId}-webapp</module>
+    </modules>
+    
+    <repositories>
+        <repository>
+            <id>jboss</id>
+            <name>JBoss Release Repository</name>
+            <url>http://repository.jboss.org/maven2</url>
+        </repository>
+    </repositories>
+    
+    <pluginRepositories>
+        <pluginRepository>
+            <id>ctpjava</id>
+            <name>CTP Public Repository</name>
+            <url>http://ctpjava.googlecode.com/svn/trunk/repository</url>
+        </pluginRepository>
+    </pluginRepositories>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.ctp.seam.maven</groupId>
+                <artifactId>maven-hotdeploy-plugin</artifactId>
+                <extensions>true</extensions>
+            </plugin>
+        </plugins>
+    </build>
+    
+    <profiles>
+        <profile>
+            <id>development</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <environment>development</environment>
+            </properties>
+        </profile>
+    </profiles>
+    
+    <properties>
+        <java.source.version>1.5</java.source.version>
+        <jboss.seam.version>[2.1.2,3.0)</jboss.seam.version>
+        <jboss.richfaces.version>3.3.1.GA</jboss.richfaces.version>
+        <jboss.jbpm-jpdl.version>3.2.3</jboss.jbpm-jpdl.version>
+        <jboss.embedded.version>beta3.SP4</jboss.embedded.version>
+        <drools.version>4.0.7</drools.version>
+        <javax.faces.version>1.2_12</javax.faces.version>
+        <jboss.server>default</jboss.server>
+        <jboss.server.directory>${serverDir}</jboss.server.directory>
+        <jboss.deploy.directory>${dollar}{jboss.server.directory}/server/${dollar}{jboss.server}/deploy</jboss.deploy.directory>
+    </properties>
 
 </project>
