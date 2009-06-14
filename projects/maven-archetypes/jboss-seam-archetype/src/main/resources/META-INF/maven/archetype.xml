@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype>
+  <id>jboss-seam-archetype</id>
+  <resources>
+    <resource>jboss-seam-archetype-jbossconfig/pom.xml</resource>
+    <resource>jboss-seam-archetype-jbossconfig/src/main/resources/archetype.properties</resource>
+    <resource>jboss-seam-archetype-jbossconfig/src/main/resources/default/deploy/jboss-seam-archetype-ds.xml</resource>
+    <resource>jboss-seam-archetype-webapp/pom.xml</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/resources/META-INF/spring/module-context.xml</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/index.html</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/WEB-INF/web.xml</resource>
+    <resource>jboss-seam-archetype-webapp/src/test/resources/log4j.xml</resource>
+  </resources>
+</archetype>
