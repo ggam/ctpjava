@@ -1,6 +1,6 @@
-#set( $symbol_pound = '#' )
-#set( $symbol_dollar = '$' )
-#set( $symbol_escape = '\' )
+#set( $pound = '#' )
+#set( $dollar = '$' )
+#set( $escape = '\' )
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE datasources
@@ -9,6 +9,10 @@
 
 <datasources>
     <local-tx-datasource>
-        <jndi-name>${symbol_dollar}{artifactId}Datasource</jndi-name>
+        <jndi-name>${artifactId}Datasource</jndi-name>
+        <connection-url>${dollar}{db.connection.url}</connection-url>
+        <driver-class>${dollar}{db.driver.class}</driver-class>
+        <user-name>${dollar}{db.user.name}</user-name>
+        <password>${dollar}{db.password}</password>
     </local-tx-datasource>
 </datasources>
