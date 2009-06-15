@@ -11,7 +11,7 @@
 
     <context-param>
         <param-name>org.richfaces.SKIN</param-name>
-        <param-value>glassX</param-value>
+        <param-value>laguna</param-value>
     </context-param>
 
     <!-- Suppress spurious stylesheets -->

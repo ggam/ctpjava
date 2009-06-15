@@ -152,7 +152,10 @@ public class HotClassesPackagingTask extends ClassesPackagingTask {
     
     private String extractWildcardPattern(final File target, final File rootDir) {
         String result = extractPattern(target, rootDir);
-        return result + "/**";
+        result += "/**";
+        if (result.startsWith("/"))
+            result = result.substring(1);
+        return result;
     }
     
     private String extractPattern(final File target, final File rootDir) {

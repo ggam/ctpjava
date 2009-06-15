@@ -1,8 +1,11 @@
+#set( $pound = '#' )
+#set( $dollar = '$' )
+#set( $escape = '\' )
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
     JCA Deployers
-    $Id: jca-deployers-beans.xml 7115 2008-01-10 23:23:32Z pmuir $
+    ${dollar}Id: jca-deployers-beans.xml 7115 2008-01-10 23:23:32Z pmuir ${dollar}
 -->
 <deployment xmlns="urn:jboss:bean-deployer:2.0">
 

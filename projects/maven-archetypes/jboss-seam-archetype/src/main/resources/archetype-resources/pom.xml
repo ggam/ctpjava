@@ -38,6 +38,7 @@
             <plugin>
                 <groupId>com.ctp.seam.maven</groupId>
                 <artifactId>maven-hotdeploy-plugin</artifactId>
+                <version>0.3.0</version>
                 <extensions>true</extensions>
             </plugin>
         </plugins>
@@ -65,7 +66,8 @@
         <javax.faces.version>1.2_12</javax.faces.version>
         <jboss.server>default</jboss.server>
         <jboss.server.directory>${serverDir}</jboss.server.directory>
-        <jboss.deploy.directory>${dollar}{jboss.server.directory}/server/${dollar}{jboss.server}/deploy</jboss.deploy.directory>
+        <jboss.servers.directory>${dollar}{jboss.server.directory}/server</jboss.servers.directory>
+        <jboss.deploy.directory>${dollar}{jboss.servers.directory}/${dollar}{jboss.server}/deploy</jboss.deploy.directory>
     </properties>
 
 </project>

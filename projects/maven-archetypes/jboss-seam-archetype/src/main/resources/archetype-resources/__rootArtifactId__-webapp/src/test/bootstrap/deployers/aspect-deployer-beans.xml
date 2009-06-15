@@ -1,3 +1,6 @@
+#set( $pound = '#' )
+#set( $dollar = '$' )
+#set( $escape = '\' )
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
@@ -30,7 +33,7 @@
       <property name="include">org.jboss.test., org.jboss.injbossaop.</property>
       <property name="exclude">org.jboss.</property>
       <!-- This avoids instrumentation of hibernate cglib enhanced proxies
-      <property name="ignore">*$$EnhancerByCGLIB$$*</property> -->
+      <property name="ignore">*${dollar}${dollar}EnhancerByCGLIB${dollar}${dollar}*</property> -->
       <property name="optimized">true</property>
       <property name="verbose">false</property>
       <!--

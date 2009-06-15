@@ -1,3 +1,6 @@
+#set( $pound = '#' )
+#set( $dollar = '$' )
+#set( $escape = '\' )
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE aop PUBLIC
    "-//JBoss//DTD JBOSS AOP 1.0//EN"
@@ -169,7 +172,7 @@
          <interceptor-ref name="org.jboss.ejb3.tx.TxInterceptorFactory"/>
          <interceptor-ref name="org.jboss.ejb3.AllowedOperationsInterceptor"/>
       </bind>
-      <bind pointcut="execution(public * $instanceof{javax.ejb.SessionSynchronization}->*(..))">
+      <bind pointcut="execution(public * ${dollar}instanceof{javax.ejb.SessionSynchronization}->*(..))">
          <interceptor-ref name="org.jboss.ejb3.stateful.SessionSynchronizationInterceptor"/>
       </bind>
       <bind pointcut="execution(public * *->*(..))">
@@ -238,7 +241,7 @@
          <interceptor-ref name="org.jboss.ejb3.tx.TxInterceptorFactory"/>
          <interceptor-ref name="org.jboss.ejb3.AllowedOperationsInterceptor"/>
       </bind>
-      <bind pointcut="execution(public * $instanceof{javax.ejb.SessionSynchronization}->*(..))">
+      <bind pointcut="execution(public * ${dollar}instanceof{javax.ejb.SessionSynchronization}->*(..))">
          <interceptor-ref name="org.jboss.ejb3.stateful.SessionSynchronizationInterceptor"/>
       </bind>
       <bind pointcut="execution(public * *->*(..))">
