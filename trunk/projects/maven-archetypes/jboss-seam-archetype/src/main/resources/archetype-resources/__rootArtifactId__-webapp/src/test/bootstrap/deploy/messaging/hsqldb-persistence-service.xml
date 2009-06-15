@@ -1,3 +1,6 @@
+#set( $pound = '#' )
+#set( $dollar = '$' )
+#set( $escape = '\' )
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
@@ -5,7 +8,7 @@
      
      DO NOT USE HYPERSONIC IN PRODUCTION or in a clustered environment- Hypersonic does not have transaction isolation
 
-     $Id: hsqldb-persistence-service.xml 6916 2007-12-05 17:53:00Z pmuir $
+     ${dollar}Id: hsqldb-persistence-service.xml 6916 2007-12-05 17:53:00Z pmuir ${dollar}
  -->
 
 <server>

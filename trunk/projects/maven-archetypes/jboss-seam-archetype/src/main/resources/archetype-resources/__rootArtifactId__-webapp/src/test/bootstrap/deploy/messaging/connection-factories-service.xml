@@ -1,9 +1,12 @@
+#set( $pound = '#' )
+#set( $dollar = '$' )
+#set( $escape = '\' )
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
      Messaging Connection Factories deployment descriptor.
 
-     $Id: connection-factories-service.xml 6916 2007-12-05 17:53:00Z pmuir $
+     ${dollar}Id: connection-factories-service.xml 6916 2007-12-05 17:53:00Z pmuir ${dollar}
  -->
 
 <server>

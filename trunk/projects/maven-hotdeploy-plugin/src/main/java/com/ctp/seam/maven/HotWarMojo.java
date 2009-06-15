@@ -43,14 +43,24 @@ public class HotWarMojo extends WarMojo {
      * @required
      */
     private boolean duplicateClassExclusion;
+
+    /**
+     * The directory the application gets deployed in. Not the app server directory,
+     * directly the application directory containing the /WEB-INF directory.
+     * @parameter default-value="${project.build.directory}/${project.build.finalName}"
+     * @required
+     */
+    private File deployDirectory;
     
     // ------------------------------------------------------------------------
     // PUBLIC METHODS
     // ------------------------------------------------------------------------
     
     public void execute() throws MojoExecutionException, MojoFailureException {
-        if (supportsPackaging())
+        if (supportsPackaging()) {
+            setWebappDirectory(deployDirectory);
             super.execute();
+        }
     }
     
     // ------------------------------------------------------------------------
@@ -58,7 +68,8 @@ public class HotWarMojo extends WarMojo {
     // ------------------------------------------------------------------------
     
     protected boolean supportsPackaging() {
-        return true; //"war".equals(getProject().getPackaging().toLowerCase());
+        String projectPackaging = getProject().getPackaging().toLowerCase();
+        return "war".equals(projectPackaging) || "seam-war".equals(projectPackaging);
     }
 
     protected WarPackagingContext createWarPackagingContext(

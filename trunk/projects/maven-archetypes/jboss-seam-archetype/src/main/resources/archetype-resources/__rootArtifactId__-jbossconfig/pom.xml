@@ -14,4 +14,51 @@
     <artifactId>${artifactId}</artifactId>
     <name>[${dollar}{project.parent.artifactId} :: JBoss Configuration]</name>
 
+        <build>
+        <defaultGoal>process-resources</defaultGoal>
+        <resources>
+            <resource>
+                <directory>src/main/resources/${dollar}{jboss.server}</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources/${dollar}{jboss.server}</directory>
+                <excludes>
+                    <exclude>**/*.xml</exclude>
+                    <exclude>**/*.properties</exclude>
+                </excludes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+
+        <!--The lowest filter file takes precedence -->
+        <filters>
+            <filter>../environment/filters/${rootArtifactId}-${dollar}{environment}.properties</filter>
+        </filters>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <outputDirectory>${dollar}{jboss.servers.directory}/${dollar}{jboss.server}</outputDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>resources</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+    </build>
+
 </project>

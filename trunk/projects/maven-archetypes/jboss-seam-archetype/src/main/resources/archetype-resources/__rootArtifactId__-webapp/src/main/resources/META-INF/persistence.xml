@@ -8,16 +8,16 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd" 
              version="1.0">
              
-   <persistence-unit name="sample" transaction-type="JTA">
+   <persistence-unit name="${rootArtifactId}" transaction-type="JTA">
       <provider>org.hibernate.ejb.HibernatePersistence</provider>
-      <jta-data-source>sampleDatasource</jta-data-source>
+      <jta-data-source>${rootArtifactId}Datasource</jta-data-source>
       <properties>
          <property name="hibernate.dialect" value="org.hibernate.dialect.${dollar}{hibernate.dialect}Dialect"/>
-         <property name="hibernate.hbm2ddl.auto" value="update"/>
-         <property name="hibernate.show_sql" value="true"/>
+         <property name="hibernate.hbm2ddl.auto" value="${dollar}{hibernate.hbm2ddl}"/>
+         <property name="hibernate.show_sql" value="${dollar}{hibernate.showsql}"/>
          <property name="hibernate.format_sql" value="true"/>
          <!-- Only relevant if Seam is loading the persistence unit (Java SE bootstrap) -->
-         <property name="hibernate.transaction.manager_lookup_class" value="@transactionManagerLookupClass@"/>
+         <property name="hibernate.transaction.manager_lookup_class" value="${dollar}{transactionManagerLookupClass}"/>
       </properties>
    </persistence-unit>
     
