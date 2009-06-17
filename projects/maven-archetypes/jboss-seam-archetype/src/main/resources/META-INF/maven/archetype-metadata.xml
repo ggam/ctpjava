@@ -2,11 +2,9 @@
 <archetype-descriptor name="archetype">
     <requiredProperties>
         <requiredProperty key="serverType">
-            <defaultValue>jboss</defaultValue>
+            <defaultValue>jboss5</defaultValue>
         </requiredProperty>
-        <requiredProperty key="serverDir">
-            <!-- defaultValue>/usr/local/jboss</defaultValue -->
-        </requiredProperty>
+        <requiredProperty key="serverDir"/>
     </requiredProperties>
     <fileSets>
         <fileSet filtered="true" encoding="UTF-8">
