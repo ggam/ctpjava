@@ -31,6 +31,11 @@
             <name>CTP Public Repository</name>
             <url>http://ctpjava.googlecode.com/svn/trunk/repository</url>
         </pluginRepository>
+        <pluginRepository>
+            <id>repository.jboss.org</id>
+            <name>JBoss Repository</name>
+            <url>http://repository.jboss.org/maven2</url>
+        </pluginRepository>
     </pluginRepositories>
     
     <build>
@@ -38,8 +43,13 @@
             <plugin>
                 <groupId>com.ctp.seam.maven</groupId>
                 <artifactId>maven-hotdeploy-plugin</artifactId>
-                <version>0.3.0</version>
+                <version>0.3.1</version>
                 <extensions>true</extensions>
+            </plugin>
+            <plugin>
+                <!-- run with 'mvn cli:execute-phase' -->
+                <groupId>org.twdata.maven</groupId>
+                <artifactId>maven-cli-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

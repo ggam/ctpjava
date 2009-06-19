@@ -297,6 +297,17 @@
                     </componentProperties>
                 </configuration>
             </plugin>
+            <plugin>
+                <!-- run with 'mvn cli:execute-phase' and use 'hot' -->
+                <groupId>org.twdata.maven</groupId>
+                <artifactId>maven-cli-plugin</artifactId>
+                <configuration>
+                    <userAliases>
+                        <hot>hotdeploy:exploded -o</hot>
+                        <cln>clean -o -Pclean</cln>
+                    </userAliases>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
