@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-catalog>
+  <archetypes>
+    <archetype>
+      <groupId>com.ctp.archetype</groupId>
+      <artifactId>jboss-seam-archetype</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <description>Archetype for JBoss Seam Projects</description>
+    </archetype>
+  </archetypes>
+</archetype-catalog>
