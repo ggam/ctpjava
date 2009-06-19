@@ -5,6 +5,7 @@
       <groupId>com.ctp.archetype</groupId>
       <artifactId>jboss-seam-archetype</artifactId>
       <version>1.0.0-SNAPSHOT</version>
+      <repository>http://ctpjava.googlecode.com/svn/trunk/repository</repository>
       <description>Archetype for JBoss Seam Projects</description>
     </archetype>
   </archetypes>
