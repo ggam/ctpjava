@@ -143,6 +143,7 @@
             </exclusions>
         </dependency>
 
+#if ($ajaxLibrary.equals("richfaces"))
         <!-- *************** RichFaces Dependency *************** -->
 
         <dependency>
@@ -165,6 +166,34 @@
             <artifactId>laguna</artifactId>
             <version>${dollar}{jboss.richfaces.version}</version>
         </dependency>
+#elseif ($ajaxLibrary.equals("icefaces"))
+        <!-- *************** ICEFaces Dependency *************** -->
+        <dependency>
+            <groupId>org.icefaces</groupId>
+            <artifactId>icefaces</artifactId>
+            <version>${dollar}{icefaces.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.sun.xml.fastinfoset</groupId>
+                    <artifactId>FastInfoset</artifactId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.icefaces</groupId>
+            <artifactId>icefaces-facelets</artifactId>
+            <version>${dollar}{icefaces.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.icefaces</groupId>
+            <artifactId>icefaces-comps</artifactId>
+            <version>${dollar}{icefaces.version}</version>
+        </dependency>
+#end
 
         <!-- *************** Drools / jBPM Dependency *************** -->
 
