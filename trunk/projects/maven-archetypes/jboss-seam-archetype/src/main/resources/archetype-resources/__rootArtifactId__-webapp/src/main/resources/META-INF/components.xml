@@ -20,6 +20,10 @@
 
    <core:init debug="@debug@" jndi-pattern="@jndiPattern@"/>
 
+#if ($ajaxLibrary.equals("icefaces"))
+   <component name="renderManager" scope="application" class="com.icesoft.faces.async.render.RenderManager" auto-create="true"/>
+#end
+
    <core:manager concurrent-request-timeout="500"
                  conversation-timeout="120000"
                  conversation-id-parameter="cid"

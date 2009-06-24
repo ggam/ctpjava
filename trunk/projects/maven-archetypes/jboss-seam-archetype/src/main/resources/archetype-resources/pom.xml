@@ -74,6 +74,7 @@
         <jboss.embedded.version>beta3.SP4</jboss.embedded.version>
         <drools.version>4.0.7</drools.version>
         <javax.faces.version>1.2_12</javax.faces.version>
+        <icefaces.version>1.8.1</icefaces.version>
         <jboss.server>default</jboss.server>
         <jboss.server.directory>${serverDir}</jboss.server.directory>
         <jboss.servers.directory>${dollar}{jboss.server.directory}/server</jboss.servers.directory>

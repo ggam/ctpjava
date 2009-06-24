@@ -4,6 +4,9 @@
         <requiredProperty key="serverType">
             <defaultValue>jboss5</defaultValue>
         </requiredProperty>
+        <requiredProperty key="ajaxLibrary">
+            <defaultValue>icefaces</defaultValue>
+        </requiredProperty>
         <requiredProperty key="serverDir"/>
     </requiredProperties>
     <fileSets>

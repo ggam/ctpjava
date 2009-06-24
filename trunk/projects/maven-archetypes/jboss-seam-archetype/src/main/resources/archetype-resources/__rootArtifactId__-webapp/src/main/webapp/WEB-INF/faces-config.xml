@@ -14,7 +14,11 @@
          <supported-locale>it</supported-locale>
          <supported-locale>tr</supported-locale>
       </locale-config>
+#if ($ajaxLibrary.equals("icefaces"))
+      <view-handler>com.icesoft.faces.facelets.D2DSeamFaceletViewHandler</view-handler>
+#else
       <view-handler>com.sun.facelets.FaceletViewHandler</view-handler>
+#end
    </application>
 
 </faces-config>
