@@ -38,6 +38,7 @@
     <resource>jboss-seam-archetype-webapp/src/main/webapp/img/dtpick.gif</resource>
     <resource>jboss-seam-archetype-webapp/src/main/webapp/img/error.gif</resource>
     <resource>jboss-seam-archetype-webapp/src/main/webapp/img/false.png</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/img/ICEfaces-logo.gif</resource>
     <resource>jboss-seam-archetype-webapp/src/main/webapp/img/manytoone.gif</resource>
     <resource>jboss-seam-archetype-webapp/src/main/webapp/img/msgerror.png</resource>
     <resource>jboss-seam-archetype-webapp/src/main/webapp/img/msginfo.png</resource>
@@ -88,6 +89,7 @@
     <resource>jboss-seam-archetype-webapp/src/test/bootstrap/deployers/security-deployer-beans.xml</resource>
     <resource>jboss-seam-archetype-webapp/src/test/bootstrap/META-INF/persistence.properties</resource>
     
+    <resource>jboss-seam-archetype-webapp/src/test/resources/META-INF/jboss-seam-archetype-ds.xml</resource>
     <resource>jboss-seam-archetype-webapp/src/test/resources/seam.properties</resource>
     <resource>jboss-seam-archetype-webapp/src/test/resources/testng-all.xml</resource>
   </resources>

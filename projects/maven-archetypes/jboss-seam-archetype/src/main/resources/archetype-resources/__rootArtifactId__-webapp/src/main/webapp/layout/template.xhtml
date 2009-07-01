@@ -68,7 +68,7 @@
     <ui:include src="menu.xhtml">
         <ui:param name="projectName" value="${rootArtifactId}"/>
     </ui:include>
-    <ice:outputConnectionStatus activeLabel="requesting..." styleClass="connectionStatus"/>
+    <ice:outputConnectionStatus activeLabel="requesting..."/>
 
     <div class="body">
         <h:messages id="messages" globalOnly="true" styleClass="message" rendered="#{showGlobalMessages != 'false'}"
