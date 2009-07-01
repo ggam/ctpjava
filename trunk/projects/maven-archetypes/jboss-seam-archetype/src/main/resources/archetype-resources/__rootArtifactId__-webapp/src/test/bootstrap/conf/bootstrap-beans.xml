@@ -145,9 +145,9 @@
    <!-- A filter for excluding files from the scanner -->
    <bean name="DeploymentFilter" class="org.jboss.virtual.plugins.vfs.helpers.ExtensibleFilter">
       <!-- Files starting with theses strings are ignored -->
-      <property name="prefixes">#,%,\,,.,_$</property>
+      <property name="prefixes">${pound},%,\,,.,_${dollar}</property>
       <!-- Files ending with theses strings are ignored -->
-      <property name="suffixes">#,$,%,~,\,v,.BAK,.bak,.old,.orig,.tmp,.rej,.sh</property>
+      <property name="suffixes">${pound},${dollar},%,~,\,v,.BAK,.bak,.old,.orig,.tmp,.rej,.sh</property>
       <!-- Files matching with theses strings are ignored -->
       <property name="matches">.make.state,.nse_depinfo,CVS,CVS.admin,RCS,RCSLOG,SCCS,TAGS,core,tags</property>
    </bean>

@@ -112,6 +112,7 @@
             <value>commons-modeler.jar</value>
             <value>tomcat-apr.jar</value>
             <value>servlets-webdav.jar</value>
+            <value>classes</value>
          </set>
       </property>
       <depends>AspectLibrary</depends>

@@ -1,3 +1,6 @@
+#set( $pound = '#' )
+#set( $dollar = '$' )
+#set( $escape = '\' )
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
@@ -11,7 +14,7 @@
         </layout>
     </appender>
 
-    <!-- ############### Embedded JBoss AS #################  -->
+    <!-- ${pound}${pound}${pound} Embedded JBoss AS ${pound}${pound}${pound}  -->
     <category name="org.jboss">
         <priority value="ERROR"/>
     </category>
@@ -25,7 +28,7 @@
         <priority value="ERROR"/>
     </category>
 
-    <!-- ############### Hibernate logging ################# -->
+    <!-- ${pound}${pound}${pound} Hibernate logging ${pound}${pound}${pound} -->
 
     <category name="org.hibernate">
         <priority value="ERROR"/>
@@ -52,7 +55,7 @@
     </category>
 
 
-    <!-- ############### Seam logging ################### -->
+    <!-- ${pound}${pound}${pound} Seam logging ${pound}${pound}${pound} -->
     <category name="org.jboss.seam">
         <priority value="WARN"/>
     </category>

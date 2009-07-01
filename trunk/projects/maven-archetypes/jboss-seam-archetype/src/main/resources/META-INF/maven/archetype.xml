@@ -94,6 +94,10 @@
     <resource>jboss-seam-archetype-webapp/src/test/resources/testng-all.xml</resource>
   </resources>
   <sources>
-      <source>jboss-seam-archetype-webapp/src/main/hot/Authenticator.java</source>
+    <source>jboss-seam-archetype-webapp/src/main/hot/Authenticator.java</source>
   </sources>
+  <testSources>
+    <source>jboss-seam-archetype-webapp/src/test/java/AuthenticatorTest.java</source>
+  </testSources>
+  
 </archetype>
