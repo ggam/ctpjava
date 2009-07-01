@@ -51,7 +51,8 @@
     <resource>jboss-seam-archetype-webapp/src/main/webapp/layout/menu.xhtml</resource>
     <resource>jboss-seam-archetype-webapp/src/main/webapp/layout/sort.xhtml</resource>
     <resource>jboss-seam-archetype-webapp/src/main/webapp/layout/template.xhtml</resource>
-    <resource>jboss-seam-archetype-webapp/src/main/webapp/stylesheet/theme.css</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/stylesheet/theme-icefaces.css</resource>
+    <resource>jboss-seam-archetype-webapp/src/main/webapp/stylesheet/theme-richfaces.css</resource>
     <resource>jboss-seam-archetype-webapp/src/main/webapp/stylesheet/theme.xcss</resource>
     <resource>jboss-seam-archetype-webapp/src/main/webapp/stylesheet/useradmin.css</resource>
     <resource>jboss-seam-archetype-webapp/src/main/webapp/WEB-INF/faces-config.xml</resource>

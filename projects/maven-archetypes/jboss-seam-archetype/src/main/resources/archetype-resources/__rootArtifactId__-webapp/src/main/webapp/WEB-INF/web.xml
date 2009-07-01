@@ -57,6 +57,11 @@
     </context-param>
     
 #elseif ($ajaxLibrary.equals("icefaces"))
+	<context-param>
+        <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+        <param-value>server</param-value>
+    </context-param>
+    
     <context-param>
         <param-name>com.icesoft.faces.actionURLSuffix</param-name>
         <param-value>.seam</param-value>
@@ -104,6 +109,12 @@
         <filter-name>Seam Filter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
 
     <servlet>
         <servlet-name>Seam Resource Servlet</servlet-name>
@@ -147,12 +158,6 @@
     </servlet-mapping>
 
 #if (!$ajaxLibrary.equals("icefaces"))
-    <servlet>
-        <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.seam</url-pattern>

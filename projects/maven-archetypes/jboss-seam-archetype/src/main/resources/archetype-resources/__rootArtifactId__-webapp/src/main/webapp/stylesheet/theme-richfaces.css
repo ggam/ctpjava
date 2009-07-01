@@ -49,6 +49,10 @@ select {
 	margin-bottom: 10px;
 }
 
+.rich-table {
+	width: 100%;
+}
+
 .body {
 	padding: 30px;
 }
@@ -120,6 +124,22 @@ img.errors {
 	padding-left: 2px;
 }
 
+.rich-stglpanel-body {
+	overflow: auto;
+} 
+
+/* the specificity here is necessary to override the defaults */
+/*
+.rich-panel .rich-panel-header,
+.rich-stglpanel .rich-stglpanel-header {
+	padding: 2px 3px;
+}*/
+
+.rich-panel input[type=submit], .rich-panel input[type=button],
+.rich-tabpanel input[type=submit], .rich-tabpanel input[type=button] {
+	margin-bottom: 0;
+}
+
 .tableControl input[type=submit], .tableControl input[type=button], .tableControl select {
 	margin: 5px 0 5px 5px;
 }
@@ -138,6 +158,28 @@ img.errors {
 .actionButtons select {
 	margin: 5px 5px 5px 0;
 	vertical-align: bottom;
+}
+
+.rich-toolbar-item a {
+	text-decoration: none;
+}
+
+.rich-toolbar-item a:hover, .rich-ddmenu-label-select {
+	text-decoration: underline;
+}
+
+.rich-toolbar-item .rich-menu-item a:hover {
+	text-decoration: none;
+}
+
+.rich-datalist {
+	list-style: square;
+	margin: 6px 0 1px 0;
+	padding-left: 18px;
+}
+
+.rich-list-item {
+	padding-bottom: 4px;
 }
 
 div.info {
@@ -174,89 +216,3 @@ table.radio td {
 table.radio input[type=radio] {
    vertical-align: bottom;
 }
-
-#if ($ajaxLibrary.equals("icefaces"))
-.iceDatTbl{
-	margin:0px ;
-}
-.iceDataTblOutline {
-	width: 98%;
-}
-/* BEGIN: make the resizable handle prettier */
-.iceDatTblResHdlr, .iceDatTblResBor, .iceDatTblBlkTd {
-	width: 1px;
-	background-color: #FFFFFF;
-}
-.iceDatTblBlkTd {
-	/*border-top: none;*/
-	border-right: 1px solid #CCCCCC;
-	/*border-bottom: none;*/
-}
-.iceDatTblBlkTd img {
-	display: none;
-}
-/* END */
-.iceTblHeader {
-	font-size:11px;
-	color: #000000;
-	padding-left: 5px;
-	padding-right: 5px;
-	padding-top: 3px;
-	padding-bottom: 3px;
-	border-right: 1px solid #CCCCCC;
-	border-bottom: 1px solid #CCCCCC;
-
-}
-/* data tables are rendered with alternating row colors */
-.iceTblRow1 {
-	background-color: #FFFFFF;
-}
-
-.iceTblRow2 {
-	background-color: #eeeeee;
-}
-#end
-
-#if ($ajaxLibrary.equals("richfaces"))
-.rich-table {
-	width: 100%;
-}
-
-.rich-stglpanel-body {
-	overflow: auto;
-} 
-
-/* the specificity here is necessary to override the defaults */
-/*
-.rich-panel .rich-panel-header,
-.rich-stglpanel .rich-stglpanel-header {
-	padding: 2px 3px;
-}*/
-
-.rich-panel input[type=submit], .rich-panel input[type=button],
-.rich-tabpanel input[type=submit], .rich-tabpanel input[type=button] {
-	margin-bottom: 0;
-}
-
-.rich-toolbar-item a {
-	text-decoration: none;
-}
-
-.rich-toolbar-item a:hover, .rich-ddmenu-label-select {
-	text-decoration: underline;
-}
-
-.rich-toolbar-item .rich-menu-item a:hover {
-	text-decoration: none;
-}
-
-.rich-datalist {
-	list-style: square;
-	margin: 6px 0 1px 0;
-	padding-left: 18px;
-}
-
-.rich-list-item {
-	padding-bottom: 4px;
-}
-#end

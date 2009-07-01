@@ -5,7 +5,7 @@
             <defaultValue>jboss5</defaultValue>
         </requiredProperty>
         <requiredProperty key="ajaxLibrary">
-            <defaultValue>icefaces</defaultValue>
+            <defaultValue>richfaces</defaultValue>
         </requiredProperty>
         <requiredProperty key="serverDir"/>
     </requiredProperties>
