@@ -3,10 +3,6 @@
 #set( $escape = '\' )
 <?xml version='1.0'?>
 
-<!DOCTYPE policy PUBLIC
-      "-//JBoss//DTD JBOSS Security Config 3.0//EN"
-      "http://www.jboss.org/j2ee/dtd/security_config.dtd">
-
 <!-- The XML based JAAS login configuration read by the
 org.jboss.security.auth.login.XMLLoginConfig mbean. Add
 an application-policy element for each security domain.

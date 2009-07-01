@@ -242,6 +242,7 @@
         <testResources>
             <testResource>
                 <directory>${dollar}{basedir}/src/test/resources</directory>
+                <filtering>true</filtering>
             </testResource>
             <testResource>
                 <directory>${dollar}{basedir}/src/test/bootstrap</directory>
