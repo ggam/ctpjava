@@ -1,0 +1,19 @@
+#set( $pound = '#' )
+#set( $dollar = '$' )
+#set( $escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE datasources
+    PUBLIC "-//JBoss/DTD JBOSS JACA CONFIG 1.5/EN"
+    "http://www.jboss.org/j2ee/dtd/jboss-ds_1_5.dtd">
+
+<datasources>
+    <local-tx-datasource>
+        <jndi-name>${rootArtifactId}Datasource</jndi-name>
+        <use-java-context>false</use-java-context>
+        <connection-url>${dollar}{db.connection.url}</connection-url>
+        <driver-class>${dollar}{db.driver.class}</driver-class>
+        <user-name>${dollar}{db.user.name}</user-name>
+        <password>${dollar}{db.password}</password>
+    </local-tx-datasource>
+</datasources>
