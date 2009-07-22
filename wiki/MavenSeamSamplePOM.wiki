@@ -1,5 +1,9 @@
 #summary A complete Maven POM to be used with Seam WAR projects.
-#labels Featured,Phase-Implementation
+#labels Phase-Implementation
+
+= Deprecated =
+
+This POM is not maintained anymore. Please use the JBossSeamMavenArchetype instead
 
 = Sample Maven POM =
 
