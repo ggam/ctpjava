@@ -45,6 +45,7 @@ Define value for version: 1.0-SNAPSHOT: :
 Define value for package: com.ctp: : com.ctp.fluxcapacitor
 Confirm properties configuration:
 serverType: jboss5
+ajaxLibrary: richfaces
 serverDir: /Developer/Servers/JBoss/jboss-5.1.0.GA
 groupId: com.ctp
 artifactId: fluxcapacitor
@@ -79,3 +80,9 @@ The project currently features two modules: One with the actual web application,
 Environment specific properties are referenced in filter property files. You can find the development filter file in `${artifactId}/environment/filters/${artifactId}-development.properties`. The filter file selection happens in the parent POM. It defines a development profile which sets the environment property. Setting this property to test will look for a `${artifactId}/environment/filters/${artifactId}-test.properties` filter file.
 
 Note that the parent POM contains your JBoss installation directory hard coded. You might want to factor this out into a developer specific profile when working in a team. Fire up your JBoss instance. Everything should start up well (fingers crossed...) and you can point your browser to the base URL of your application.
+
+== Options ==
+
+|| *Property* || *Default* || *Value* || *Description* ||
+|| ajaxLibrary || richfaces|| icefaces || Use ICEFaces instead of JBoss RichFaces ||
+|| serverType || jboss5 || jboss4 || Required if you target a JBoss 4.2.x installation ||
