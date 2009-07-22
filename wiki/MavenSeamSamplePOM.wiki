@@ -3,7 +3,7 @@
 
 = Deprecated =
 
-This POM is not maintained anymore. Please use the JBossSeamMavenArchetype instead
+This POM is not maintained anymore. Please use the [JBossSeamMavenArchetype] instead
 
 = Sample Maven POM =
 
