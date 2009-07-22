@@ -1,4 +1,5 @@
 #summary Quickly create a JBoss Seam Project with a Maven Archetype
+#labels Featured
 
 = JBoss Seam Maven Archetype - WAR only Project =
 
