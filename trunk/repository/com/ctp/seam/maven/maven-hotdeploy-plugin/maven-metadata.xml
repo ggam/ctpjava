@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.ctp.seam.maven</groupId>
+  <artifactId>maven-hotdeploy-plugin</artifactId>
+  <version>0.3.2</version>
+  <versioning>
+    <versions>
+      <version>0.3.2</version>
+    </versions>
+    <lastUpdated>20090809200615</lastUpdated>
+  </versioning>
+</metadata>
