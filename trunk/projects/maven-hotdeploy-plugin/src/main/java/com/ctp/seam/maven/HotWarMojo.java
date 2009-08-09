@@ -51,6 +51,13 @@ public class HotWarMojo extends WarMojo {
      * @required
      */
     private File deployDirectory;
+
+    /**
+     * Switch off hot deploy packaging by setting this to false.
+     * @parameter default-value="false"
+     * @required
+     */
+    private boolean useWarPackaging;
     
     // ------------------------------------------------------------------------
     // PUBLIC METHODS
@@ -58,7 +65,8 @@ public class HotWarMojo extends WarMojo {
     
     public void execute() throws MojoExecutionException, MojoFailureException {
         if (supportsPackaging()) {
-            setWebappDirectory(deployDirectory);
+            if (!useWarPackaging)
+                setWebappDirectory(deployDirectory);
             super.execute();
         }
     }
@@ -79,10 +87,14 @@ public class HotWarMojo extends WarMojo {
         WarPackagingContext ctx = super.createWarPackagingContext(
                 webappDirectory, cache, overlayManager,
                 defaultFilterWrappers, nonFilteredFileExtensions);
+        if (useWarPackaging)
+            return ctx;
         return new SeamWarPackagingContext(ctx, hotdeployOutputDirectory, duplicateClassExclusion);
     }
 
     protected WarProjectPackagingTask createWarPackagingTask() {
+        if (useWarPackaging)
+            return super.createWarPackagingTask();
         return new SeamWarProjectPackagingTask(getWebResources(), getWebXml(), 
                 getContainerConfigXML());
     }

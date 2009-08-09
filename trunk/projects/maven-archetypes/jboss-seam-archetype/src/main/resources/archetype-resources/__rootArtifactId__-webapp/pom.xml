@@ -365,6 +365,25 @@
                 </plugins>
             </build>
         </profile>
+        <profile>
+            <id>package-war</id>
+            <build>
+                <defaultGoal>clean</defaultGoal>
+                <plugins>
+                    <plugin>
+                        <groupId>com.ctp.seam.maven</groupId>
+                        <artifactId>maven-hotdeploy-plugin</artifactId>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <source>${dollar}{java.source.version}</source>
+                            <target>${dollar}{java.source.version}</target>
+                            <sourceDirectory>${dollar}{basedir}/src/main/hot</sourceDirectory>
+                            <useWarPackaging>true</useWarPackaging>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 
     <reporting>

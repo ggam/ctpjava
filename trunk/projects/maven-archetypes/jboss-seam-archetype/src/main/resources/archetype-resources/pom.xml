@@ -36,14 +36,33 @@
             <name>JBoss Repository</name>
             <url>http://repository.jboss.org/maven2</url>
         </pluginRepository>
+        <pluginRepository>
+            <id>repository.twdata.org</id>
+            <name>twdata Repository</name>
+            <url>http://twdata-m2-repository.googlecode.com/svn</url>
+        </pluginRepository>
     </pluginRepositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.ctp.seam.maven</groupId>
+                <artifactId>maven-hotdeploy-plugin</artifactId>
+                <version>0.3.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.twdata.maven</groupId>
+                <artifactId>maven-cli-plugin</artifactId>
+                <version>0.6.9</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     
     <build>
         <plugins>
             <plugin>
                 <groupId>com.ctp.seam.maven</groupId>
                 <artifactId>maven-hotdeploy-plugin</artifactId>
-                <version>0.3.1</version>
                 <extensions>true</extensions>
             </plugin>
             <plugin>
@@ -68,10 +87,10 @@
     
     <properties>
         <java.source.version>1.5</java.source.version>
-        <jboss.seam.version>[2.1.2,3.0)</jboss.seam.version>
+        <jboss.seam.version>2.1.2</jboss.seam.version>
         <jboss.richfaces.version>3.3.1.GA</jboss.richfaces.version>
         <jboss.jbpm-jpdl.version>3.2.3</jboss.jbpm-jpdl.version>
-        <jboss.embedded.version>beta3.SP4</jboss.embedded.version>
+        <jboss.embedded.version>beta3.SP9</jboss.embedded.version>
         <drools.version>4.0.7</drools.version>
         <javax.faces.version>1.2_12</javax.faces.version>
         <icefaces.version>1.8.1</icefaces.version>

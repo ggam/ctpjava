@@ -10,7 +10,7 @@
 <datasources>
     <local-tx-datasource>
         <jndi-name>${rootArtifactId}Datasource</jndi-name>
-        <use-java-context>false</use-java-context>
+        <use-java-context>true</use-java-context>
         <connection-url>${dollar}{db.connection.url}</connection-url>
         <driver-class>${dollar}{db.driver.class}</driver-class>
         <user-name>${dollar}{db.user.name}</user-name>
