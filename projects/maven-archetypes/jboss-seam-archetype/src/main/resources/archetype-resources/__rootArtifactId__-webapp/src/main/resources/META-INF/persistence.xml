@@ -10,7 +10,7 @@
              
    <persistence-unit name="${rootArtifactId}" transaction-type="JTA">
       <provider>org.hibernate.ejb.HibernatePersistence</provider>
-      <jta-data-source>${rootArtifactId}Datasource</jta-data-source>
+      <jta-data-source>java:/${rootArtifactId}Datasource</jta-data-source>
       <properties>
          <property name="hibernate.dialect" value="org.hibernate.dialect.${dollar}{hibernate.dialect}Dialect"/>
          <property name="hibernate.hbm2ddl.auto" value="${dollar}{hibernate.hbm2ddl}"/>
