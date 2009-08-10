@@ -51,6 +51,12 @@ Reconfigure the packaging and plugin-settings of the *WAR module POM*:
 </plugin>
 }}}
 
+If you want to build a war without hot deploy packaged classes (e.g. for a production deployment), you can switch this off by configuring the plugin with
+
+{{{
+<useWarPackaging>true</useWarPackaging>
+}}}
+
 == EAR Module Configuration ==
 
 Change the dependency type of your WAR project:
