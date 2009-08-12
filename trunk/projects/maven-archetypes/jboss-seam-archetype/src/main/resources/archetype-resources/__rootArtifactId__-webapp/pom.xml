@@ -200,21 +200,7 @@
         <dependency>
             <groupId>org.drools</groupId>
             <artifactId>drools-compiler</artifactId>
-            <version>${dollar}{drools.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>xerces</groupId>
-                    <artifactId>xercesImpl</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>xml-apis</groupId>
-                    <artifactId>xml-apis</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>janino</groupId>
-                    <artifactId>janino</artifactId>
-                </exclusion>
-            </exclusions>
+            <version>${drools.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jbpm</groupId>
