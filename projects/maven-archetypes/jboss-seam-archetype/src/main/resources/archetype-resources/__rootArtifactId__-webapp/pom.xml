@@ -200,7 +200,7 @@
         <dependency>
             <groupId>org.drools</groupId>
             <artifactId>drools-compiler</artifactId>
-            <version>${drools.version}</version>
+            <version>${dollar}{drools.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jbpm</groupId>
