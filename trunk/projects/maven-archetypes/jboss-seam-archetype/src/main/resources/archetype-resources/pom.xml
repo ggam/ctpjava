@@ -48,7 +48,7 @@
             <dependency>
                 <groupId>com.ctp.seam.maven</groupId>
                 <artifactId>maven-hotdeploy-plugin</artifactId>
-                <version>${hotdeploy.version}</version>
+                <version>${dollar}{hotdeploy.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.twdata.maven</groupId>
@@ -64,7 +64,7 @@
                 <groupId>com.ctp.seam.maven</groupId>
                 <artifactId>maven-hotdeploy-plugin</artifactId>
                 <extensions>true</extensions>
-                <version>${hotdeploy.version}</version>
+                <version>${dollar}{hotdeploy.version}</version>
             </plugin>
             <plugin>
                 <!-- run with 'mvn cli:execute-phase' -->
