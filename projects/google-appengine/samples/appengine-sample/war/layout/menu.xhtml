@@ -1,0 +1,22 @@
+<s:fragment
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:s="http://jboss.com/products/seam/taglib">
+    <h2>
+        <h:outputText value="#{projectName}"/>
+    </h2>
+    <ul>
+    	<li><s:link view="/home.xhtml" value="Home" propagation="none"/></li>
+    </ul>
+    <p id="layoutdims">
+        <h:outputText value="signed in as: #{identity.username}" rendered="#{identity.loggedIn}"/>
+        <s:fragment rendered="#{not identity.loggedIn}">
+        	<a href="#{identity.createLoginURL('/home.seam')}">Login</a>
+        </s:fragment>
+        <s:fragment rendered="#{identity.loggedIn}">
+        	<a href="#{identity.createLogoutURL('/home.seam')}">Logout</a>
+        </s:fragment>
+    </p>
+</s:fragment>
