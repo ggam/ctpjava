@@ -114,6 +114,10 @@ public class HotClassesPackagingTask extends ClassesPackagingTask {
                 result.add(extractPattern(children[i], rootDir));
         }
     }
+
+    protected PathSet getFilesToIncludes(File baseDir, String[] includes, String[] excludes) {
+        return super.getFilesToIncludes(baseDir, includes, excludes);
+    }
     
     // ------------------------------------------------------------------------
     // PRIVATE METHODS
