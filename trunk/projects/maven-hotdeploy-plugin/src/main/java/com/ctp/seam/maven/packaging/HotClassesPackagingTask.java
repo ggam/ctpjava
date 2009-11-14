@@ -157,8 +157,6 @@ public class HotClassesPackagingTask extends ClassesPackagingTask {
     private String extractWildcardPattern(final File target, final File rootDir) {
         String result = extractPattern(target, rootDir);
         result += "/**";
-        if (result.startsWith("/"))
-            result = result.substring(1);
         return result;
     }
     
@@ -166,7 +164,7 @@ public class HotClassesPackagingTask extends ClassesPackagingTask {
         String result = relativePath(target, rootDir);
         if (!"/".equals(File.separator))
             result = replaceToAntPattern(result);
-        return result;
+        return pathSetFormat(result);
     }
     
     private String replaceToAntPattern(final String value) {
@@ -202,6 +200,12 @@ public class HotClassesPackagingTask extends ClassesPackagingTask {
     
     private boolean visitedSuccess(final File file) {
         return visited(file) && ((Boolean) directoriesVisited.get(file.getAbsolutePath())).booleanValue();
+    }
+
+    private String pathSetFormat(String in) {
+        if (in != null && in.startsWith("/"))
+            return in.substring(1);
+        return in;
     }
 
 }
