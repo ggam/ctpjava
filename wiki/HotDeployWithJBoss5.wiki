@@ -1,5 +1,5 @@
 #summary How to fix continuous redeployments on JBoss 5.x
-#labels Phase-Deploy
+#labels Phase-Deploy,Featured
 
 = Using Hot Deploy on JBoss 5 =
 
