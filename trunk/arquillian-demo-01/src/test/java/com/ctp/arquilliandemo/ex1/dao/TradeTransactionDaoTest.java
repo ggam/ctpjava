@@ -1,6 +1,6 @@
 package com.ctp.arquilliandemo.ex1.dao;
 
-import static org.fest.assertions.Assertions.*;
+import static org.fest.assertions.Assertions.assertThat;
 
 import java.util.List;
 
@@ -8,12 +8,12 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.api.Deployment;
+import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ArchivePaths;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.impl.base.asset.ByteArrayAsset;
 import org.junit.Rule;
 import org.junit.Test;
@@ -37,12 +37,11 @@ public class TradeTransactionDaoTest {
 
     @Deployment
     public static Archive<?> createDeploymentPackage() {
-        
-        return ShrinkWrap.create("test.war", WebArchive.class)
+        return ShrinkWrap.create("test.jar", JavaArchive.class)
                          .addPackages(false, Share.class.getPackage())
                          .addClass(TradeTransactionDao.class)
-                         .addWebResource(new ByteArrayAsset("<beans />".getBytes()), ArchivePaths.create("beans.xml"))
-                         .addWebResource("inmemory-test-persistence.xml", "classes/META-INF/persistence.xml");
+                         .addManifestResource(new ByteArrayAsset("<beans />".getBytes()), ArchivePaths.create("beans.xml"))
+                         .addManifestResource("inmemory-test-persistence.xml", ArchivePaths.create("persistence.xml"));
     }
 
     @Rule
