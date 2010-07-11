@@ -2,7 +2,6 @@ package com.ctp.arquilliandemo.ex1.event;
 
 import java.io.Serializable;
 
-import javax.ejb.Remove;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -34,7 +33,4 @@ public class TradeTransactionObserver implements Serializable {
         tradeTransactionDao.save(tradeTransaction);
     }
     
-    @Remove
-    public void destroy() {}
-
 }
