@@ -2,6 +2,8 @@ package com.ctp.arquilliandemo.ex1.service;
 
 import static org.fest.assertions.Assertions.assertThat;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,6 +22,7 @@ import org.junit.runner.RunWith;
 import com.ctp.arquilliandemo.ex1.dao.ShareDao;
 import com.ctp.arquilliandemo.ex1.dao.TradeTransactionDao;
 import com.ctp.arquilliandemo.ex1.domain.Share;
+import com.ctp.arquilliandemo.ex1.domain.TradeTransaction;
 import com.ctp.arquilliandemo.ex1.domain.User;
 import com.ctp.arquilliandemo.ex1.event.ShareEvent;
 import com.ctp.test.UnderTest;
@@ -55,6 +58,9 @@ public class TradeServiceTest {
     @Inject
     ShareDao shareDao;
     
+    @Inject
+    TradeTransactionDao tradeTransactionDao;
+    
     @Inject @UnderTest
     TradeService tradeService;
     
@@ -78,7 +84,7 @@ public class TradeServiceTest {
     public void shouldRemoveShareFromTheUserPortfolio() {
         // given
         User user = em.find(User.class, 1L);
-        Share share = em.find(Share.class, 1L);
+        Share share = shareDao.getByKey("CTP");
         Integer amount = Integer.valueOf(1);
         
         // when
@@ -86,6 +92,22 @@ public class TradeServiceTest {
         
         // then
         assertThat(user.getSharesAmount(share)).isEqualTo(1);
+    }
+    
+    @Test
+    @PrepareData("datasets/shares.xml")
+    public void shouldLogTradeTransactionAfterBuyingShare() {
+        // given
+        User user = em.find(User.class, 1L);
+        Share share = shareDao.getByKey("CTP");
+        Integer amount = Integer.valueOf(1);
+        
+        // when
+        tradeService.buy(user, share, amount);
+        
+        // then
+        List<TradeTransaction> transactions = tradeTransactionDao.getTransactions(user);
+        assertThat(transactions).hasSize(1);
     }
 
 }
