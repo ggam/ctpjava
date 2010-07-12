@@ -51,43 +51,46 @@ public class User {
     @CollectionTable(name="USER_SHARES")
     @Column(name="AMOUNT")
     @MapKeyJoinColumn(name="SHARE_ID")
-    private Map<Share, Integer> shares = new HashMap<Share, Integer>();
+    private Map<Share, Integer> portfolio = new HashMap<Share, Integer>();
 
     
     public void addShares(Share share, Integer amount) {
         Integer current = Integer.valueOf(0);
-        if (shares.containsKey(share)) {
-            current = shares.get(share);
+        if (portfolio.containsKey(share)) {
+            current = portfolio.get(share);
         }
     
-        shares.put(share, current + amount);
+        portfolio.put(share, current + amount);
         
     }
     
     /**
      * Removes given amount of shares. If amount is greater then currently stored
-     * value it will be set to 0.
+     * value {@link IllegalArgumentException} will be thrown
      * 
      * @param share
-     * @param amount
+     * @param amount of shares to be removed from portfolio
+     * 
+     * @throws IllegalArgumentException if amount is greater then currently stored
+     * value
      */
     public void removeShares(Share share, Integer amount) {
         Integer current = Integer.valueOf(0);
-        if (shares.containsKey(share)) {
-            current = shares.get(share);
+        if (portfolio.containsKey(share)) {
+            current = portfolio.get(share);
         }
         
         int newAmount = current - amount;
         if (newAmount < 0) {
-            newAmount = 0;
+            throw new IllegalArgumentException("Current amount of shares is smaller than amount to be removed.");
         }
-        shares.put(share, newAmount);
+        portfolio.put(share, newAmount);
         
     }
 
     public Integer getSharesAmount(Share share) {
-        if (shares.containsKey(share)) {
-            return shares.get(share);
+        if (portfolio.containsKey(share)) {
+            return portfolio.get(share);
         }
         
         return Integer.valueOf(0);
@@ -134,12 +137,12 @@ public class User {
         this.lastname = lastname;
     }
 
-    public Map<Share, Integer> getShares() {
-        return Collections.unmodifiableMap(shares);
+    public Map<Share, Integer> getPortfolio() {
+        return Collections.unmodifiableMap(portfolio);
     }
 
-    void setShares(Map<Share, Integer> shares) {
-        this.shares = shares;
+    void setPortfolio(Map<Share, Integer> portfolio) {
+        this.portfolio = portfolio;
     }
     
 }
