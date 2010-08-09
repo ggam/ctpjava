@@ -229,7 +229,6 @@
     </profiles>
     
     <properties>
-        <jersey.version>1.1.5.1</jersey.version>
         <junit.version>4.8.1</junit.version>
         <arquillian.version>1.0.0.Alpha2</arquillian.version>
         <glassfish.version>3.0.1</glassfish.version>
@@ -238,5 +237,4 @@
         <dbunit.version>2.4.7</dbunit.version>
     </properties>
     
-  
 </project>
