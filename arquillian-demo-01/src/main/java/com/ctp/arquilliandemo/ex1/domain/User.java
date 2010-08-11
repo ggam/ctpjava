@@ -1,5 +1,6 @@
 package com.ctp.arquilliandemo.ex1.domain;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +23,9 @@ import javax.validation.constraints.Size;
  *
  */
 @Entity
-public class User {
+public class User implements Serializable {
+
+    private static final long serialVersionUID = -8643528344705097702L;
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
