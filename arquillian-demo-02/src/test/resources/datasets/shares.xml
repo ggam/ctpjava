@@ -1,0 +1,5 @@
+<dataset>
+    <user id="1" firstname="John" lastname="Smith" username="username" password="password" />
+    <share id="1" key="CTP" price="18.00" />   
+    <user_shares user_id="1" share_id="1" amount="2" />
+</dataset>
