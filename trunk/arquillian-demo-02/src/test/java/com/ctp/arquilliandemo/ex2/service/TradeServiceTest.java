@@ -25,7 +25,6 @@ import com.ctp.arquilliandemo.ex2.domain.Share;
 import com.ctp.arquilliandemo.ex2.domain.TradeTransaction;
 import com.ctp.arquilliandemo.ex2.domain.User;
 import com.ctp.arquilliandemo.ex2.event.ShareEvent;
-import com.ctp.test.UnderTest;
 import com.ctp.test.db.DataHandlingRule;
 import com.ctp.test.db.PrepareData;
 
@@ -61,7 +60,7 @@ public class TradeServiceTest {
     @Inject
     TradeTransactionDao tradeTransactionDao;
     
-    @Inject @UnderTest
+    @Inject
     TradeService tradeService;
     
     @Test

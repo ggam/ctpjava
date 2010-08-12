@@ -18,7 +18,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.ctp.arquilliandemo.ex2.domain.Share;
-import com.ctp.test.UnderTest;
 import com.ctp.test.db.DataHandlingRule;
 import com.ctp.test.db.PrepareData;
 
@@ -40,7 +39,7 @@ public class ShareDaoTest {
     @PersistenceContext
     EntityManager em;
     
-    @Inject @UnderTest
+    @Inject
     ShareDao shareDao;
     
     @Test

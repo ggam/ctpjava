@@ -28,7 +28,6 @@ import com.ctp.arquilliandemo.ex2.domain.User;
 import com.ctp.arquilliandemo.ex2.domain.User.LoggedIn;
 import com.ctp.arquilliandemo.ex2.event.ShareEvent;
 import com.ctp.arquilliandemo.ex2.service.TradeService;
-import com.ctp.test.UnderTest;
 import com.ctp.test.cdi.scope.RequiredScope;
 import com.ctp.test.cdi.scope.ScopeHandlingRule;
 import com.ctp.test.cdi.scope.ScopeType;
@@ -66,7 +65,7 @@ public class PortfolioControllerTest {
     @Inject
     TradeTransactionDao tradeTransactionDao;
     
-    @Inject @UnderTest
+    @Inject
     PortfolioController portfolioController;
     
     @Test
