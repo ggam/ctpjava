@@ -22,7 +22,7 @@ public class PortfolioController implements Serializable {
     Map<Share, Integer> sharesToBuy = new HashMap<Share, Integer>();
 
     @Inject @LoggedIn
-    User currentUser;
+    User user;
 
     @Inject
     private TradeService tradeService;
@@ -44,7 +44,7 @@ public class PortfolioController implements Serializable {
 
     public void confirm() {
         for (Map.Entry<Share, Integer> sharesAmount : sharesToBuy.entrySet()) {
-            tradeService.buy(currentUser, sharesAmount.getKey(), sharesAmount.getValue());
+            tradeService.buy(user, sharesAmount.getKey(), sharesAmount.getValue());
         }
         conversation.end();
     }
@@ -54,8 +54,8 @@ public class PortfolioController implements Serializable {
         conversation.end();
     }
     
-    public User getCurrentUser() {
-        return currentUser;
+    public User getUser() {
+        return user;
     }
 
 }
