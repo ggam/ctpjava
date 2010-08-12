@@ -74,7 +74,7 @@ public class PortfolioControllerTest {
     @RequiredScope(ScopeType.CONVERSATION)
     public void shouldAddCtpShareToUserPortfolio() {
         // given
-        User currentUser = portfolioController.getCurrentUser();
+        User user = portfolioController.getUser();
         Share ctpShare = shareDao.getByKey("CTP");
         
         // when
@@ -82,7 +82,7 @@ public class PortfolioControllerTest {
         portfolioController.confirm();
         
         // then
-        assertThat(currentUser.getSharesAmount(ctpShare)).isEqualTo(3);
+        assertThat(user.getSharesAmount(ctpShare)).isEqualTo(3);
     }
     
     @Test
@@ -90,7 +90,7 @@ public class PortfolioControllerTest {
     @RequiredScope(ScopeType.CONVERSATION)
     public void shouldNotModifyUserPortfolioWhenCancelProcess() {
         // given
-        User currentUser = portfolioController.getCurrentUser();
+        User user = portfolioController.getUser();
         Share ctpShare = shareDao.getByKey("CTP");
         
         // when
@@ -98,7 +98,7 @@ public class PortfolioControllerTest {
         portfolioController.cancel();
         
         // then
-        assertThat(currentUser.getSharesAmount(ctpShare)).isEqualTo(2);
+        assertThat(user.getSharesAmount(ctpShare)).isEqualTo(2);
     }
     
     @Test
@@ -106,7 +106,7 @@ public class PortfolioControllerTest {
     @PrepareData("datasets/shares.xml")
     public void shouldRecordTransactionWhenUserBuysAShare() {
         // given
-        User currentUser = portfolioController.getCurrentUser();
+        User user = portfolioController.getUser();
         Share ctpShare = shareDao.getByKey("CTP");
         
         // when
@@ -114,7 +114,7 @@ public class PortfolioControllerTest {
         portfolioController.confirm();
 
         // then
-        List<TradeTransaction> transactions = tradeTransactionDao.getTransactions(currentUser);
+        List<TradeTransaction> transactions = tradeTransactionDao.getTransactions(user);
         assertThat(transactions).hasSize(1);
     }
     
