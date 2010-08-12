@@ -3,8 +3,7 @@ package com.ctp.test.cdi.scope.handler;
 import org.jboss.weld.Container;
 import org.jboss.weld.context.ContextLifecycle;
 import org.jboss.weld.context.SessionContext;
-
-import com.ctp.test.cdi.scope.HashMapBeanStore;
+import org.jboss.weld.context.beanstore.HashMapBeanStore;
 
 
 public class SessionScopeHandler implements ScopeHandler {
