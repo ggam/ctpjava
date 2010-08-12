@@ -14,16 +14,15 @@ import com.ctp.arquilliandemo.ex2.domain.User;
 import com.ctp.arquilliandemo.ex2.domain.User.LoggedIn;
 import com.ctp.arquilliandemo.ex2.service.TradeService;
 
-@ConversationScoped
-@Named("portfolioController")
+@ConversationScoped @Named("portfolioController")
 public class PortfolioController implements Serializable {
     
     private static final long serialVersionUID = -3304517738187380600L;
 
+    Map<Share, Integer> sharesToBuy = new HashMap<Share, Integer>();
+
     @Inject @LoggedIn
     User currentUser;
-    
-    Map<Share, Integer> sharesToBuy = new HashMap<Share, Integer>();
 
     @Inject
     private TradeService tradeService;
@@ -41,7 +40,13 @@ public class PortfolioController implements Serializable {
         }
         
         sharesToBuy.put(share, currentAmount + amount); 
-        
+    }
+
+    public void confirm() {
+        for (Map.Entry<Share, Integer> sharesAmount : sharesToBuy.entrySet()) {
+            tradeService.buy(currentUser, sharesAmount.getKey(), sharesAmount.getValue());
+        }
+        conversation.end();
     }
     
     public void cancel() {
@@ -49,13 +54,6 @@ public class PortfolioController implements Serializable {
         conversation.end();
     }
     
-    public void confirm() {
-        for (Map.Entry<Share, Integer> sharesAmount : sharesToBuy.entrySet()) {
-            tradeService.buy(currentUser, sharesAmount.getKey(), sharesAmount.getValue());
-        }
-        conversation.end();
-    }
-
     public User getCurrentUser() {
         return currentUser;
     }
