@@ -22,7 +22,6 @@ import org.junit.runner.RunWith;
 import com.ctp.arquilliandemo.ex2.domain.Share;
 import com.ctp.arquilliandemo.ex2.domain.TradeTransaction;
 import com.ctp.arquilliandemo.ex2.domain.User;
-import com.ctp.test.UnderTest;
 import com.ctp.test.db.DataHandlingRule;
 import com.ctp.test.db.PrepareData;
 
@@ -50,7 +49,7 @@ public class TradeTransactionDaoTest {
     @PersistenceContext
     EntityManager em;
     
-    @Inject @UnderTest
+    @Inject
     TradeTransactionDao tradeTransactionDao;
     
     @Test
